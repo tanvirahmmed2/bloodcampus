@@ -7,6 +7,7 @@ import Login from "./users/Login"
 import Register from "./users/Register";
 import About from "./pages/About";
 import Donors from "./pages/Donors";
+import Error from "./pages/Error";
 
 
 function App() {
@@ -20,6 +21,7 @@ function App() {
         <Route path="/about" element={<About/>} />
         <Route path="/login" element={<Login/>}/>
         <Route path="/register" element={<Register/>}/>
+        <Route path="/*" element={<Error/>}/>
       </Routes>
 
       <Footer />
