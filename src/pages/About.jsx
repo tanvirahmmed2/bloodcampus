@@ -1,4 +1,6 @@
 import React from "react";
+import { Link } from "react-router-dom";
+
 
 const About = () => {
   return (
@@ -42,9 +44,9 @@ const About = () => {
           matters. Together, we can ensure that blood is always available for 
           those in need.
         </p>
-        <button className="bg-red-600 text-white px-6 py-3 rounded-xl font-semibold hover:bg-red-700 transition">
+        <Link to="/register" className="bg-red-600 text-white px-6 py-3 rounded-xl font-semibold hover:bg-red-700 transition">
           Join as a Donor
-        </button>
+        </Link>
       </div>
     </div>
   );
