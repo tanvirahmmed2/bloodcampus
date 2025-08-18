@@ -26,12 +26,12 @@ const Donors = () => {
         <button type='submit' className='text-xl font-semibold cursor-pointer px-3 p-1 bg-white text-red-500 rounded-lg'>Search</button>
       </form>
 
-      <div className='w-full h-[80vh] grid justify-items-center gap-4 overflow-y-scroll p-6 
-                      [grid-template-columns:repeat(auto-fill,minmax(400px,1fr))] rounded-lg'>
+      <div className='w-full h-[80vh] grid justify-items-center gap-4 overflow-y-scroll overflow-x-hidden p-6 
+                      [grid-template-columns:repeat(auto-fill,minmax(300px,1fr))] rounded-lg'>
         {donors.map((donor) => {
           const { id, name, bloodgroup, district, isAvailable, phone } = donor;
           return (
-            <div key={id} className='w-[400px] h-[180px] bg-white/30 rounded-lg p-4 flex flex-col justify-between'>
+            <div key={id} className='w-[300px] h-[180px] bg-white/30 rounded-lg p-4 flex flex-col justify-between'>
               
               {/* Top Row */}
               <div className='w-full flex items-center justify-between'>
