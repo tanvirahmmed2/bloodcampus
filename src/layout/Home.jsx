@@ -1,10 +1,14 @@
 import React from 'react'
+import Register from "../users/Register"
+import UsePageTitle from "../Component/UsePageTitle"
 
 const Home = () => {
+  UsePageTitle("Home")
   return (
-    <div>
-      Hello Home
-    </div>
+    <section>
+
+      <Register/>
+    </section>
   )
 }
 
