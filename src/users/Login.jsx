@@ -12,7 +12,7 @@ const Login = () => {
           <h1 className='text-4xl font-bold'>Blood Campus</h1>
           <p>a huminty organization to save life</p>
           <p>Keep donating blood and save people</p>
-          <Link to="/register" className='text-base italic text-red-600'>registered already?</Link>
+          <Link to="/register" className='text-base italic text-red-600'>new donor?</Link>
         </div>
 
         <form action="" className='w-full flex flex-col items-center justify-center'>

@@ -8,7 +8,7 @@ import Register from "./users/Register";
 
 function App() {
   return (
-    <div className="min-h-screen bg-gradient-to-br from-red-400 to-red-200 w-full overflow-x-hidden text-white">
+    <div className="min-h-screen bg-gradient-to-br from-red-500 to-red-300 w-full overflow-x-hidden text-white">
       <Navbar />
 
       <Routes>
