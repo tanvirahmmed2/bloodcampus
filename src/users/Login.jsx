@@ -15,8 +15,6 @@ const Login = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     console.log("Login Data:", formData);
-    alert("Login functionality coming soon!");
-    // Integrate with context or backend authentication
   };
 
   return (

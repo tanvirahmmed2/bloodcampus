@@ -27,8 +27,6 @@ const Register = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     console.log("Registered Donor:", formData);
-    alert("Donor Registered Successfully!");
-    // Send formData to backend or context here
   };
 
   const bloodGroups = ["A+", "A-", "B+", "B-", "O+", "O-", "AB+", "AB-"];
