@@ -7,7 +7,10 @@ const Navbar = () => {
       <nav className='w-full h-14 flex flex-row items-center justify-around'>
         <a href="/" className='font-bold text-3xl'>Blood Campus</a>
         <div>
-
+          <Link className='h-14 px-4' to="/">Home</Link>
+          <Link className='h-14 px-4' to="/donor">Donor</Link>
+          <Link className='h-14 px-4' to="/help">Help</Link>
+          <Link className='h-14 px-4' to="/login">LogIn</Link>
         </div>
       </nav>
     </section>

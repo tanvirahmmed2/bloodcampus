@@ -9,11 +9,9 @@ function App() {
     <div className="min-h-screen bg-gradient-to-br from-red-400 to-red-200 w-full overflow-x-hidden text-white">
       <Navbar />
 
-      <BrowserRouter>
-        <Routes>
-          <Route path="/" element={<Home/>}/>
-        </Routes>
-      </BrowserRouter>
+      <Routes>
+        <Route path="/" element={<Home />} />
+      </Routes>
 
       <Footer />
     </div>
