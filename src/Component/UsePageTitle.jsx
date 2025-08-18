@@ -5,7 +5,7 @@ const UsePageTitle = (title) => {
   const location = useLocation();
 
   useEffect(() => {
-    document.title = `Tanvir Ahmmed - ${title} `;
+    document.title = `Blood Campus | ${title} `;
   }, [title, location]);
 };
 
