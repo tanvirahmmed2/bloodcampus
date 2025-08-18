@@ -31,7 +31,7 @@ const Donors = () => {
         {donors.map((donor) => {
           const { id, name, bloodgroup, district, isAvailable, phone } = donor;
           return (
-            <div key={id} className='w-[300px] h-[180px] bg-white/30 rounded-lg p-4 flex flex-col justify-between'>
+            <div key={id} className='w-[300px] h-[180px] bg-red-400 rounded-lg p-4 flex flex-col justify-between'>
               
               {/* Top Row */}
               <div className='w-full flex items-center justify-between'>
@@ -40,7 +40,7 @@ const Donors = () => {
                   <h1 className='font-bold'>{name}</h1>
                   <p className='italic'>{district}</p>
                 </div>
-                <p className={`font-bold ${isAvailable? "text-green-500":"text-red-500"}`}>{isAvailable ? "Available" : "Unavailable"}</p>
+                <p className={`font-bold ${isAvailable? "text-green-600":"text-red-500"}`}>{isAvailable ? "Available" : "Unavailable"}</p>
               </div>
 
               <p className='italic'>Call or book for faster connection</p>
