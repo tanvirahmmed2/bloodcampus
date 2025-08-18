@@ -40,14 +40,14 @@ const Donors = () => {
                   <h1 className='font-bold'>{name}</h1>
                   <p className='italic'>{district}</p>
                 </div>
-                <p className='font-bold'>{isAvailable ? "Available" : "Unavailable"}</p>
+                <p className={`font-bold ${isAvailable? "text-green-500":"text-red-500"}`}>{isAvailable ? "Available" : "Unavailable"}</p>
               </div>
 
               <p className='italic'>Call or book for faster connection</p>
 
               {/* Bottom Row */}
               <div className='w-full flex flex-row items-center justify-between'>
-                <a className={`px-3 p-1 rounded-lg ${isAvailable ? "bg-green-500" : "bg-red-500"}`} href={`tel:${phone}`}>Call</a>
+                <a className={`px-3 p-1 rounded-lg ${isAvailable ? "bg-green-500" : "bg-red-500 opacity-25"} `} href={`tel:${phone}`}>Call</a>
                 <p className='px-3 p-1 rounded-lg bg-white text-black cursor-pointer'>Book</p>
               </div>
 
