@@ -1,36 +1,86 @@
-import React from 'react'
-import { Link } from 'react-router-dom'
+import React, { useState } from "react";
+import { Link } from "react-router-dom";
 
 const Login = () => {
-  return (
-    <section className="w-full text-center min-h-screen px-4 md:px-20 flex items-center justify-center">
-      <div className='w-full bg-white/20 rounded-lg flex flex-col md:flex-row items-center justify-center p-4 gap-4'>
+  const [formData, setFormData] = useState({
+    email: "",
+    password: "",
+  });
 
-        <div className='w-full flex flex-col items-center justify-center gap-2 '>
-          <p>Donate Blood, Save Life</p>
-          <p>welcome to</p>
-          <h1 className='text-4xl font-bold'>Blood Campus</h1>
-          <p>a huminty organization to save life</p>
-          <p>Keep donating blood and save people</p>
-          <Link to="/register" className='text-base italic text-red-600'>new donor?</Link>
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData({ ...formData, [name]: value });
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    console.log("Login Data:", formData);
+    alert("Login functionality coming soon!");
+    // Integrate with context or backend authentication
+  };
+
+  return (
+    <section className="w-full min-h-screen flex items-center justify-center px-4 md:px-20 bg-gradient-to-b ">
+      <div className="w-full max-w-3xl bg-white shadow-xl rounded-xl flex flex-col md:flex-row items-center justify-center p-6 gap-6">
+        
+        {/* Info Panel */}
+        <div className="w-full md:w-1/2 flex flex-col items-center justify-center gap-3 text-center">
+          <p className="text-red-600 font-semibold">Donate Blood, Save Life</p>
+          <p>Welcome to</p>
+          <h1 className="text-3xl md:text-4xl font-bold text-red-700">Blood Campus</h1>
+          <p className="text-gray-600">A humanitarian organization to save lives</p>
+          <p className="text-gray-500 text-sm">Keep donating blood and save people</p>
+          <Link 
+            to="/register" 
+            className="text-red-600 font-semibold hover:underline mt-2"
+          >
+            New donor? Register here
+          </Link>
         </div>
 
-        <form action="" className='w-full flex flex-col items-center justify-center'>
-          <div className='w-full flex flex-col p-2 gap-2 items-start'>
-            <label htmlFor="email">email</label>
-            <input type="email" name='email' id='name' required className='bg-red-500 bg-opacity-15 rounded-lg px-2 p-1 w-full outline-none' />
+        {/* Login Form */}
+        <form 
+          onSubmit={handleSubmit} 
+          className="w-full md:w-1/2 flex flex-col gap-4"
+        >
+          <div className="flex flex-col gap-2">
+            <label htmlFor="email" className="font-medium">Email</label>
+            <input
+              type="email"
+              name="email"
+              id="email"
+              value={formData.email}
+              onChange={handleChange}
+              placeholder="Enter your email"
+              required
+              className="w-full px-3 py-2 rounded-lg border border-gray-300 outline-none focus:ring-2 focus:ring-red-400"
+            />
           </div>
-          <div className='w-full flex flex-col p-2 gap-2 items-start'>
-            <label htmlFor="password">password</label>
-            <input type="password" name='password' id='password' required className='bg-red-500 bg-opacity-15 rounded-lg px-2 p-1 w-full outline-none' />
+
+          <div className="flex flex-col gap-2">
+            <label htmlFor="password" className="font-medium">Password</label>
+            <input
+              type="password"
+              name="password"
+              id="password"
+              value={formData.password}
+              onChange={handleChange}
+              placeholder="Enter your password"
+              required
+              className="w-full px-3 py-2 rounded-lg border border-gray-300 outline-none focus:ring-2 focus:ring-red-400"
+            />
           </div>
-          <button type='submit' className='bg-green-500 p-1 px-3 rounded-lg'>Login</button>
+
+          <button 
+            type="submit" 
+            className="w-full py-2 bg-red-600 text-white font-semibold rounded-lg hover:bg-red-700 transition mt-2"
+          >
+            Login
+          </button>
         </form>
-
       </div>
-
     </section>
-  )
-}
+  );
+};
 
-export default Login
+export default Login;
