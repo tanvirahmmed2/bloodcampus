@@ -1,9 +1,11 @@
 import React, { useContext } from 'react';
 import { Link } from 'react-router-dom';
 import { ThemeContext } from '../Component/ThemeProvider';
+import UsePageTitle from '../Component/UsePageTitle'
 
 const Donors = () => {
   const { donors } = useContext(ThemeContext);
+  UsePageTitle("Donors")
 
   return (
     <section className='w-full min-h-screen p-8 flex flex-col items-start gap-12'>

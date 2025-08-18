@@ -1,8 +1,11 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
+import UsePageTitle from '../Component/UsePageTitle'
+
 
 const About = () => {
+  UsePageTitle("About")
   return (
     <div className=" min-h-screen py-12 px-6 md:px-20">
       <div className="max-w-4xl mx-auto text-center">
