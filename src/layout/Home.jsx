@@ -1,13 +1,13 @@
 import React from 'react'
+import Register from "../users/Register"
 import UsePageTitle from "../Component/UsePageTitle"
-import Login from '../users/Login'
 
 const Home = () => {
   UsePageTitle("Home")
   return (
     <section>
 
-      <Login/>
+      <Register/>
     </section>
   )
 }
