@@ -35,15 +35,12 @@ const Donors = () => {
               
               {/* Top Row */}
               <div className='w-full flex items-center justify-between'>
-                <p className='text-xl font-bold bg-white text-red-600 rounded-lg p-2'>{bloodgroup}</p>
-                <div>
-                  <h1 className='font-bold'>{name}</h1>
-                  <p className='italic'>{district}</p>
-                </div>
+                <p className='text-xl font-bold  rounded-lg p-2'>{bloodgroup}</p>
+                <h1 className='font-bold'>{name}</h1>
                 <p className={`font-bold ${isAvailable? "text-green-600":"text-red-500"}`}>{isAvailable ? "Available" : "Unavailable"}</p>
               </div>
 
-              <p className='italic'>Call or book for faster connection</p>
+              <p className='italic'>All over {district}</p>
 
               {/* Bottom Row */}
               <div className='w-full flex flex-row items-center justify-between'>
