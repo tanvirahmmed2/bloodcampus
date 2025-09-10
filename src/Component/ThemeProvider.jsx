@@ -28,14 +28,14 @@ export const ThemeProvider = ({ children }) => {
 
 
   useEffect(() => {
-
     const fetchDonors = async () => {
       try {
         const res = await fetch('https://bloodcampus-server.vercel.app/api/user/');
         const data = await res.json();
-        setDonors(data);
+        setDonors(Array.isArray(data) ? data : []); // ensure array
       } catch (error) {
         console.error("Failed to fetch donors:", error);
+        setDonors([]);
       } finally {
         setLoading(false);
       }
