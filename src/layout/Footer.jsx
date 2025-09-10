@@ -9,7 +9,7 @@ const Footer = () => {
 
   return (
     <section className='w-full h-auto p-2 overflow-x-hidden'>
-      <footer className='w-full h-auto text-xs p-4 bg-white/20 rounded-lg flex gap-6 flex-col md:flex-row items-center justify-around'>
+      <footer className='w-full h-auto text-xs p-4 bg-white/5 rounded-lg flex gap-6 flex-col md:flex-row items-center justify-around'>
         <div className='w-auto flex flex-col items-center justify-center gap-2'>
           <h1 className='text-xl font-bold'>Blood Campus</h1>
           <p>A humanity organization</p>

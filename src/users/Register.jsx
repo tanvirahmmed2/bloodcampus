@@ -1,18 +1,18 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import { Link } from "react-router-dom";
 import UsePageTitle from "../Component/UsePageTitle";
-import { useContext } from "react";
 import { ThemeContext } from "../Component/ThemeProvider";
 
 const Register = () => {
   UsePageTitle("Register Donor");
-  const { bloodgroups, districts } = useContext(ThemeContext)
+  const { bloodgroups, districts } = useContext(ThemeContext);
 
   const [formData, setFormData] = useState({
     name: "",
     email: "",
     bloodgroup: "",
     dateofbirth: "",
+    lastdonated: "",
     phone: "",
     district: "",
     password: "",
@@ -32,21 +32,21 @@ const Register = () => {
     console.log("Registered Donor:", formData);
   };
 
-
-
   return (
-    <section className="w-full min-h-screen p-4 flex items-center justify-center  ">
-      <div className="w-full max-w-lg  shadow-sm bg-white/10 shadow-white rounded-xl p-6 flex flex-col items-center">
+    <section className="w-full min-h-screen p-4 flex items-center justify-center">
+      <div className="w-full max-w-lg shadow-lg bg-white/5 rounded-2xl p-8 flex flex-col items-center">
         <h1 className="text-3xl font-bold text-red-600 mb-2">Become a Donor</h1>
-        <p className=" mb-4">Donate blood, save a life</p>
+        <p className="mb-6 text-gray-700">Donate blood, save a life ❤️</p>
 
         <form className="w-full text-black flex flex-col gap-4" onSubmit={handleSubmit}>
+          
+          {/* Name */}
           <div>
-            <label htmlFor="name">name</label>
+            <label htmlFor="name" className="block mb-1 font-medium">Full Name</label>
             <input
               type="text"
               name="name"
-              placeholder="Full Name"
+              placeholder="Enter your full name"
               value={formData.name}
               onChange={handleChange}
               required
@@ -54,68 +54,70 @@ const Register = () => {
             />
           </div>
 
+          {/* Email */}
           <div>
-            <label htmlFor="email">email</label>
+            <label htmlFor="email" className="block mb-1 font-medium">Email</label>
             <input
               type="email"
               name="email"
-              placeholder="Email Address"
+              placeholder="Enter your email"
               value={formData.email}
               onChange={handleChange}
               required
               className="w-full px-3 py-2 rounded-lg border border-gray-300 outline-none focus:ring-2 focus:ring-red-400"
             />
           </div>
-          <div>
-            <label htmlFor="dateofbirth">date of birth</label>
-            <input
-              type="date"
-              name="dateofbirth"
-              value={formData.dateofbirth}
-              onChange={handleChange}
-              required
-              className="w-1/2 px-3 py-2 rounded-lg border border-gray-300 outline-none focus:ring-2 focus:ring-red-400"
-            />
-          </div>
 
-
-          <div className="flex gap-2">
+          {/* Date of Birth & Last Donated */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             <div>
-              <label htmlFor="bloodgroup">blood group</label>
-              <select
-                name="bloodgroup"
-                value={formData.bloodgroup}
-                onChange={handleChange}
-                required
-                className="w-1/2 px-3 py-2 rounded-lg border border-gray-300 outline-none focus:ring-2 focus:ring-red-400"
-              >
-                <option value="">Select Blood Group</option>
-                {bloodgroups.map((bg) => (
-                  <option key={bg} value={bg}>{bg}</option>
-                ))}
-              </select>
-            </div>
-
-            <div>
-              <label htmlFor="lastdoneted">last doneted</label>
+              <label htmlFor="dateofbirth" className="block mb-1 font-medium">Date of Birth</label>
               <input
                 type="date"
-                name="lastdoneted"
+                name="dateofbirth"
                 value={formData.dateofbirth}
                 onChange={handleChange}
                 required
-                className="w-1/2 px-3 py-2 rounded-lg border border-gray-300 outline-none focus:ring-2 focus:ring-red-400"
+                className="w-full px-3 py-2 rounded-lg border border-gray-300 outline-none focus:ring-2 focus:ring-red-400"
               />
             </div>
 
+            <div>
+              <label htmlFor="lastdonated" className="block mb-1 font-medium">Last Donated</label>
+              <input
+                type="date"
+                name="lastdonated"
+                value={formData.lastdonated}
+                onChange={handleChange}
+                className="w-full px-3 py-2 rounded-lg border border-gray-300 outline-none focus:ring-2 focus:ring-red-400"
+              />
+            </div>
           </div>
 
+          {/* Blood Group */}
           <div>
-            <label htmlFor="phone">phone</label>
+            <label htmlFor="bloodgroup" className="block mb-1 font-medium">Blood Group</label>
+            <select
+              name="bloodgroup"
+              value={formData.bloodgroup}
+              onChange={handleChange}
+              required
+              className="w-full px-3 py-2 rounded-lg border border-gray-300 outline-none focus:ring-2 focus:ring-red-400"
+            >
+              <option value="">Select Blood Group</option>
+              {bloodgroups.map((bg) => (
+                <option key={bg} value={bg}>{bg}</option>
+              ))}
+            </select>
+          </div>
+
+          {/* Phone */}
+          <div>
+            <label htmlFor="phone" className="block mb-1 font-medium">Phone</label>
             <input
               type="text"
               name="phone"
-              placeholder="Phone (+880)"
+              placeholder="+880 1XXXXXXXXX"
               value={formData.phone}
               onChange={handleChange}
               required
@@ -123,8 +125,9 @@ const Register = () => {
             />
           </div>
 
+          {/* District */}
           <div>
-            <label htmlFor="district">home district</label>
+            <label htmlFor="district" className="block mb-1 font-medium">Home District</label>
             <select
               name="district"
               value={formData.district}
@@ -139,12 +142,13 @@ const Register = () => {
             </select>
           </div>
 
+          {/* Password */}
           <div>
-            <label htmlFor="password">password</label>
+            <label htmlFor="password" className="block mb-1 font-medium">Password</label>
             <input
               type="password"
               name="password"
-              placeholder="Password"
+              placeholder="Enter password"
               value={formData.password}
               onChange={handleChange}
               required
@@ -152,9 +156,7 @@ const Register = () => {
             />
           </div>
 
-
-
-
+          {/* Submit Button */}
           <button
             type="submit"
             className="w-full py-2 mt-2 bg-red-600 text-white font-semibold rounded-lg hover:bg-red-700 transition"
