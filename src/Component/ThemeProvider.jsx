@@ -44,13 +44,11 @@ export const ThemeProvider = ({ children }) => {
     fetchDonors();
   }, []);
 
-  if (loading) {
-    return <p>Loading...</p>;
-  }
+  
 
 
   return (
-    <ThemeContext.Provider value={{ districts, bloodgroups, donors, setDonors }}>
+    <ThemeContext.Provider value={{ districts, bloodgroups, donors, setDonors, loading }}>
       {children}
     </ThemeContext.Provider>
   );

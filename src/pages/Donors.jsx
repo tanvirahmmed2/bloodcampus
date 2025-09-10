@@ -7,7 +7,7 @@ import UsePageTitle from '../Component/UsePageTitle'
 
 const Donors = () => {
   UsePageTitle("Donors")
-  const { districts, bloodgroups, donors } = useContext(ThemeContext);
+  const { districts, bloodgroups, donors, loading } = useContext(ThemeContext);
 
 
   return (
@@ -36,6 +36,7 @@ const Donors = () => {
       </form>
 
       <div className='w-full h-screen border-2 border-white/20 flex flex-wrap justify-center  gap-4 overflow-y-scroll overflow-x-hidden p-6  rounded-lg'>
+          {loading? <p>loading</p>: <></>}
 
         {donors.map((donor) => {
           const { id, name, bloodgroup, district, isAvailable, phone } = donor;
