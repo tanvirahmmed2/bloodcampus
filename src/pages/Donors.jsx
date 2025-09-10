@@ -4,12 +4,12 @@ import { ThemeContext } from '../Component/ThemeProvider';
 import UsePageTitle from '../Component/UsePageTitle'
 
 const Donors = () => {
-  const { donors } = useContext(ThemeContext);
+  const { donors, district, bloodgroup } = useContext(ThemeContext);
   UsePageTitle("Donors")
 
   return (
-    <section className='w-full min-h-screen p-8 flex flex-col items-start gap-12'>
-      
+    <section className='w-full min-h-screen p-8 flex flex-col  gap-12 items-center justify-center'>
+
       <div className='w-full flex flex-row items-center justify-around gap-6 text-center'>
         <p className='p-1 px-3 rounded-lg w-full font-bold text-lg bg-white/10'>Find donor</p>
         <Link className='p-1 px-3 rounded-lg w-full font-bold text-lg hover:bg-white/10' to="/register">Be a donor</Link>
@@ -17,43 +17,47 @@ const Donors = () => {
       </div>
 
       <form className='w-full gap-4 flex flex-col lg:flex-row items-start lg:items-center lg:justify-around justify-center'>
-        <div className='w-full max-w-[300px] flex flex-col gap-2'>
-          <label htmlFor="bloodgroup">Blood Group</label>
-          <input type="text" name='bloodgroup' id='bloodgroup' className='w-full outline-none px-2 p-1 rounded-lg bg-red-300'/>
-        </div>
-        <div className='w-full max-w-[300px] flex flex-col gap-2'>
-          <label htmlFor="district">District</label>
-          <input type="text" name='district' id='district' className='w-full outline-none px-2 p-1 rounded-lg bg-red-300'/>
-        </div>
-        <button type='submit' className='text-xl font-semibold cursor-pointer px-3 p-1 bg-white text-red-500 rounded-lg'>Search</button>
+        <select name="bloodgroup" id="bloodgroup" className='w-full max-w-[300px] flex flex-col gap-2 text-red-600 px-2 p-1 rounded-lg'>
+          {bloodgroup.map((blood) => {
+            return <option value={blood} key={blood.i} className='w-full outline-none px-2 p-1 rounded-lg bg-red-300'>{blood}</option>
+          })}
+        </select>
+        <select name="district" id="district" className='w-full max-w-[300px] flex flex-col gap-2 text-red-600 px-2 p-1 rounded-lg'>
+          {district.map((dist) => {
+            return <option value={dist} key={dist.i} className='w-full outline-none px-2 p-1 h-14 rounded-lg bg-red-300'>{dist}</option>
+          })}
+        </select>
+        <button type='submit' className=' font-semibold cursor-pointer px-3 p-1 bg-white text-red-500 rounded-lg'>Search</button>
       </form>
 
-      <div className='w-full h-[80vh] grid justify-items-center gap-4 overflow-y-scroll overflow-x-hidden p-6 
-                      [grid-template-columns:repeat(auto-fill,minmax(300px,1fr))] rounded-lg'>
+      <div className='w-full h-screen border-2 border-white/20 flex flex-wrap justify-center  gap-4 overflow-y-scroll overflow-x-hidden p-6  rounded-lg'>
         {donors.map((donor) => {
           const { id, name, bloodgroup, district, isAvailable, phone } = donor;
           return (
-            <div key={id} className='w-[300px] h-[180px] bg-red-400 rounded-lg p-4 flex flex-col justify-between'>
-              
+            <div key={id} className='w-[220px] h-[180px] bg-red-500 rounded-lg p-4 flex flex-col justify-between'>
+
               {/* Top Row */}
               <div className='w-full flex items-center justify-between'>
-                <p className='text-xl font-bold  rounded-lg p-2'>{bloodgroup}</p>
-                <h1 className='font-bold'>{name}</h1>
-                <p className={`font-bold ${isAvailable? "text-green-600":"text-red-500"}`}>{isAvailable ? "Available" : "Unavailable"}</p>
+                <p className='text-xl font-bold  rounded-lg p-2 bg-white/30'>{bloodgroup}</p>
+                <h1 className='font-bold text-xs'>{name}</h1>
+
               </div>
 
-              <p className='italic'>All over {district}</p>
+              <p className='italic'>District: {district}</p>
 
               {/* Bottom Row */}
               <div className='w-full flex flex-row items-center justify-between'>
-                <a className={`px-3 p-1 rounded-lg ${isAvailable ? "bg-green-500" : "bg-red-500 opacity-25"} `} href={`tel:${phone}`}>Call</a>
-                <p className='px-3 p-1 rounded-lg bg-white text-black cursor-pointer'>Book</p>
+
+                {
+                  isAvailable ? <a className={`px-3 p-1 rounded-lg ${isAvailable ? "bg-green-500" : "bg-red-500 opacity-25"} `} href={`tel:${phone}`}>Call</a> : <p className='italic'>not available</p>
+                }
               </div>
 
             </div>
           );
         })}
       </div>
+      <Link to='/donors' className='px-4 p-1 bg-green-500 rounded-xl bg-opacity-15'>Load more</Link>
 
     </section>
   );

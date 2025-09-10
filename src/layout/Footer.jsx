@@ -16,7 +16,7 @@ const Footer = () => {
         </div>
         <div className='w-auto flex flex-col items-end justify-center gap-2'>
           <p>Alrights are reserved {year}</p>
-          <p>Developed by <a href="https://tanvirahmmed.netlify.app" className='text-xl font-bold'>Tanvir Ahmmed</a></p>
+          <p>Directed by <a href="https://www.disibin.com" className='text-xl font-bold'>DisiBin</a></p>
         </div>
       </footer>
     </section>
