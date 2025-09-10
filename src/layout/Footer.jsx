@@ -17,7 +17,7 @@ const Footer = () => {
         <div className='w-auto flex flex-col items-center justify-center gap-2'>
           <p>Beware of scams & frauds</p>
           <p>Any kind of money transaction is strictly prohibited</p>
-          <p>Give blood & save life</p>
+          <p>Donate blood & save life</p>
           <p>We're giving fully free support form every soul</p>
           <p>be kind to people and animals</p>
         </div>
