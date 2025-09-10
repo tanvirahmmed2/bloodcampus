@@ -38,7 +38,7 @@ const Register = () => {
         <h1 className="text-3xl font-bold text-red-600 mb-2">Become a Donor</h1>
         <p className="mb-6 text-gray-700">Donate blood, save a life ❤️</p>
 
-        <form className="w-full text-black flex flex-col gap-4" onSubmit={handleSubmit}>
+        <form className="w-full text-black/50 flex flex-col gap-4" onSubmit={handleSubmit}>
           
           {/* Name */}
           <div>
