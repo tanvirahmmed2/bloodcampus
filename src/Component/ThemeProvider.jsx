@@ -1,7 +1,6 @@
 import React, { createContext, useState } from "react";
 import Blood from "../data/Blood";  
-const district= [
-  "select your district",
+const districts= [
   "Dhaka",
   "Gazipur",
   "Kishoreganj",
@@ -67,8 +66,7 @@ const district= [
   "Sunamganj",
   "Sylhet"
 ]
-const bloodgroup=[
-  "select your blood group",
+const bloodgroups=[
   "A+",
   "A-",
   "B+",
@@ -86,7 +84,7 @@ export const ThemeProvider = ({ children }) => {
   const [donors, setDonors] = useState(Blood);
 
   return (
-    <ThemeContext.Provider value={{ donors, setDonors, district, bloodgroup }}>
+    <ThemeContext.Provider value={{ donors, setDonors, districts, bloodgroups }}>
       {children}
     </ThemeContext.Provider>
   );

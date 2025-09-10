@@ -4,7 +4,7 @@ import { ThemeContext } from '../Component/ThemeProvider';
 import UsePageTitle from '../Component/UsePageTitle'
 
 const Donors = () => {
-  const { donors, district, bloodgroup } = useContext(ThemeContext);
+  const { donors, districts, bloodgroups } = useContext(ThemeContext);
   UsePageTitle("Donors")
 
   return (
@@ -17,14 +17,16 @@ const Donors = () => {
       </div>
 
       <form className='w-full gap-4 flex flex-col lg:flex-row items-start lg:items-center lg:justify-around justify-center'>
-        <select name="bloodgroup" id="bloodgroup" className='w-full max-w-[300px] flex flex-col gap-2 text-red-600 px-2 p-1 rounded-lg'>
-          {bloodgroup.map((blood) => {
-            return <option value={blood} key={blood.i} className='w-full outline-none px-2 p-1 rounded-lg bg-red-300'>{blood}</option>
+        <select name="bloodgroup" id="bloodgroup" className='w-full max-w-[300px] flex flex-col gap-2 text-red-600 px-2 p-1 rounded-lg outline-none'>
+          <option value="" className='w-full outline-none px-2 p-1 rounded-lg bg-red-300'>select a blood group</option>
+          {bloodgroups.map((blood) => {
+            return <option value={blood} key={blood} className='w-full outline-none px-2 p-1 rounded-lg bg-red-300'>{blood}</option>
           })}
         </select>
-        <select name="district" id="district" className='w-full max-w-[300px] flex flex-col gap-2 text-red-600 px-2 p-1 rounded-lg'>
-          {district.map((dist) => {
-            return <option value={dist} key={dist.i} className='w-full outline-none px-2 p-1 h-14 rounded-lg bg-red-300'>{dist}</option>
+        <select name="district" id="district" className='w-full max-w-[300px] flex flex-col gap-2 text-red-600 px-2 p-1 rounded-lg outline-none'>
+          <option value="" className='w-full outline-none px-2 p-1 rounded-lg bg-red-300'>select a district</option>
+          {districts.map((dist) => {
+            return <option value={dist} key={dist} className='w-full outline-none px-2 p-1 h-14 rounded-lg bg-red-300'>{dist}</option>
           })}
         </select>
         <button type='submit' className=' font-semibold cursor-pointer px-3 p-1 bg-white text-red-500 rounded-lg'>Search</button>

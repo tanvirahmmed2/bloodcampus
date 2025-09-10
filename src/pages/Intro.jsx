@@ -6,7 +6,7 @@ import { ThemeContext } from "../Component/ThemeProvider"
 const Intro = () => {
   const { donors } = useContext(ThemeContext)
   const availableCount = donors.filter(donor => donor.isAvailable).length;
-  console.log(donors)
+  
   
 
   return (

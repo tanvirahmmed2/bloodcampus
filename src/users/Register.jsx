@@ -1,9 +1,12 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import UsePageTitle from "../Component/UsePageTitle";
+import { useContext } from "react";
+import { ThemeContext} from "../Component/ThemeProvider";
 
 const Register = () => {
   UsePageTitle("Register Donor");
+  const {bloodgroups, districts }= useContext(ThemeContext)
 
   const [formData, setFormData] = useState({
     name: "",
@@ -29,11 +32,7 @@ const Register = () => {
     console.log("Registered Donor:", formData);
   };
 
-  const bloodGroups = ["A+", "A-", "B+", "B-", "O+", "O-", "AB+", "AB-"];
-  const districts = [
-    "Dhaka", "Chittagong", "Khulna", "Rajshahi", "Sylhet",
-    "Barishal", "Rangpur", "Mymensingh"
-  ];
+  
 
   return (
     <section className="w-full min-h-screen p-4 flex items-center justify-center  ">
@@ -71,7 +70,7 @@ const Register = () => {
               className="w-1/2 px-3 py-2 rounded-lg border border-gray-300 outline-none focus:ring-2 focus:ring-red-400"
             >
               <option value="">Select Blood Group</option>
-              {bloodGroups.map((bg) => (
+              {bloodgroups.map((bg) => (
                 <option key={bg} value={bg}>{bg}</option>
               ))}
             </select>
