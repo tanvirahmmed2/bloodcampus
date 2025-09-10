@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
 
 const Login = () => {
@@ -19,7 +20,7 @@ const Login = () => {
 
   return (
     <section className="w-full min-h-screen flex items-center justify-center px-4 md:px-20 bg-gradient-to-b ">
-      <div className="w-full max-w-3xl bg-white shadow-xl rounded-xl flex flex-col md:flex-row items-center justify-center p-6 gap-6">
+      <motion.div initial={{opacity: 0, scale: 0.8}} whileInView={{opacity:1, scale:1}} transition={{duration:0.6}} className="w-full max-w-3xl bg-white shadow-xl rounded-xl flex flex-col md:flex-row items-center justify-center p-6 gap-6">
         
         {/* Info Panel */}
         <div className="w-full md:w-1/2 flex flex-col items-center justify-center gap-3 text-center">
@@ -76,7 +77,7 @@ const Login = () => {
             Login
           </button>
         </form>
-      </div>
+      </motion.div>
     </section>
   );
 };

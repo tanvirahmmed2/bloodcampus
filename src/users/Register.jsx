@@ -1,4 +1,5 @@
 import React, { useState, useContext } from "react";
+import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
 import UsePageTitle from "../Component/UsePageTitle";
 import { ThemeContext } from "../Component/ThemeProvider";
@@ -34,11 +35,11 @@ const Register = () => {
 
   return (
     <section className="w-full min-h-screen p-4 flex items-center justify-center">
-      <div className="w-full max-w-lg shadow-lg bg-white/5 rounded-2xl p-8 flex flex-col items-center">
+      <motion.div initial={{opacity: 0, scale: 0.9}} whileInView={{opacity:1, scale:1}} transition={{duration:0.6}} className="w-full max-w-lg shadow-lg bg-white/5 rounded-2xl p-8 flex flex-col items-center">
         <h1 className="text-3xl font-bold  mb-2">Become a Donor</h1>
         <p className="mb-6 text-gray-700">Donate blood, save a life ❤️</p>
 
-        <form className="w-full text-black/50 flex flex-col gap-4" onSubmit={handleSubmit}>
+        <form  className="w-full text-black/50 flex flex-col gap-4" onSubmit={handleSubmit}>
           
           {/* Name */}
           <div>
@@ -171,7 +172,7 @@ const Register = () => {
             Login here
           </Link>
         </p>
-      </div>
+      </motion.div>
     </section>
   );
 };
