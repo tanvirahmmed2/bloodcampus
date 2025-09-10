@@ -34,7 +34,7 @@ const Donors = () => {
         {donors.map((donor) => {
           const { id, name, bloodgroup, district, isAvailable, phone } = donor;
           return (
-            <div key={id} className='w-[220px] h-[180px] bg-red-500 rounded-lg p-4 flex flex-col justify-between'>
+            <div key={id} className='w-full sm:w-[320px] h-[180px] bg-red-500 rounded-lg p-4 flex flex-col justify-between'>
 
               {/* Top Row */}
               <div className='w-full flex items-center justify-between'>
@@ -57,7 +57,9 @@ const Donors = () => {
           );
         })}
       </div>
-      <Link to='/donors' className='px-4 p-1 bg-green-500 rounded-xl bg-opacity-15'>Load more</Link>
+
+
+      
 
     </section>
   );
