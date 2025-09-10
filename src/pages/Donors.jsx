@@ -1,45 +1,13 @@
-import React, { useContext, useState, useEffect } from 'react';
+import React, { useContext,  } from 'react';
 import { motion } from 'framer-motion'
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, } from 'react-router-dom';
 import { ThemeContext } from '../Component/ThemeProvider';
 import UsePageTitle from '../Component/UsePageTitle'
 
 
 const Donors = () => {
   UsePageTitle("Donors")
-  const { districts, bloodgroups } = useContext(ThemeContext);
-  const [donors, setDonors] = useState([]);
-  const [loading, setLoading] = useState(true);
-  const navigate = useNavigate()
-
-  // Set page title at the top (before return)
-  UsePageTitle("Donors");
-
-  useEffect(() => {
-    const token = localStorage.getItem("auth-token");
-    if (!token) {
-      // Not logged in → redirect to login
-      navigate("/login");
-      return;
-    }
-    const fetchDonors = async () => {
-      try {
-        const res = await fetch('https://bloodcampus-server.vercel.app/api/user/');
-        const data = await res.json();
-        setDonors(data);
-      } catch (error) {
-        console.error("Failed to fetch donors:", error);
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    fetchDonors();
-  }, [navigate]);
-
-  if (loading) {
-    return <p>Loading...</p>;
-  }
+  const { districts, bloodgroups, donors } = useContext(ThemeContext);
 
 
   return (
