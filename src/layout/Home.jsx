@@ -1,5 +1,4 @@
 import React from 'react'
-import Register from "../users/Register"
 import { Link } from 'react-router-dom'
 import UsePageTitle from "../Component/UsePageTitle"
 import Intro from '../pages/Intro'
@@ -14,7 +13,6 @@ const Home = () => {
       <Donors/>
       <Link to='/donors' className='px-4 p-1 bg-green-500 rounded-xl bg-opacity-70'>Load more</Link>
       <About/>
-      <Register/>
     </section>
   )
 }
