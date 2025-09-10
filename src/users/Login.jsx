@@ -13,15 +13,37 @@ const Login = () => {
     setFormData({ ...formData, [name]: value });
   };
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    console.log("Login Data:", formData);
-  };
+const handleSubmit = async (e) => {
+  e.preventDefault();
+  try {
+    const response = await fetch('https://bloodcampus-server.vercel.app/api/user/login', {
+      method: 'POST',
+      headers: {
+        Accept: 'application/json',
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(formData)
+    });
+
+    const responseData = await response.json();
+
+    if (responseData.success) {
+      localStorage.setItem('auth-token', responseData.token); // ✅ fixed
+      window.location.replace('/');
+    } else {
+      alert(responseData.message || "Login failed");
+    }
+  } catch (error) {
+    console.error("Login request error:", error);
+    alert("Something went wrong");
+  }
+};
+
 
   return (
     <section className="w-full min-h-screen flex items-center justify-center px-4 md:px-20 bg-gradient-to-b ">
-      <motion.div initial={{opacity: 0, scale: 0.8}} whileInView={{opacity:1, scale:1}} transition={{duration:0.6}} className="w-full max-w-3xl bg-white shadow-xl rounded-xl flex flex-col md:flex-row items-center justify-center p-6 gap-6">
-        
+      <motion.div initial={{ opacity: 0, scale: 0.8 }} whileInView={{ opacity: 1, scale: 1 }} transition={{ duration: 0.6 }} className="w-full max-w-3xl bg-white shadow-xl rounded-xl flex flex-col md:flex-row items-center justify-center p-6 gap-6">
+
         {/* Info Panel */}
         <div className="w-full md:w-1/2 flex flex-col items-center justify-center gap-3 text-center">
           <p className="text-red-600 font-semibold">Donate Blood, Save Life</p>
@@ -29,8 +51,8 @@ const Login = () => {
           <h1 className="text-3xl md:text-4xl font-bold text-red-700">Blood Campus</h1>
           <p className="text-gray-600">A humanitarian organization to save lives</p>
           <p className="text-gray-500 text-sm">Keep donating blood and save people</p>
-          <Link 
-            to="/register" 
+          <Link
+            to="/register"
             className="text-red-600 font-semibold hover:underline mt-2"
           >
             New donor? Register here
@@ -38,9 +60,9 @@ const Login = () => {
         </div>
 
         {/* Login Form */}
-        <form 
-          onSubmit={handleSubmit} 
-          className="w-full md:w-1/2 flex flex-col gap-4"
+        <form
+          onSubmit={handleSubmit}
+          className="w-full md:w-1/2 flex flex-col gap-4 text-black"
         >
           <div className="flex flex-col gap-2">
             <label htmlFor="email" className="font-medium">Email</label>
@@ -70,8 +92,8 @@ const Login = () => {
             />
           </div>
 
-          <button 
-            type="submit" 
+          <button
+            type="submit"
             className="w-full py-2 bg-red-600 text-white font-semibold rounded-lg hover:bg-red-700 transition mt-2"
           >
             Login

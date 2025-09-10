@@ -1,12 +1,14 @@
 import React, { useState, useContext } from "react";
 import { motion } from "framer-motion";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import UsePageTitle from "../Component/UsePageTitle";
 import { ThemeContext } from "../Component/ThemeProvider";
+import { useEffect } from "react";
 
 const Register = () => {
   UsePageTitle("Register Donor");
   const { bloodgroups, districts } = useContext(ThemeContext);
+  const navigate=useNavigate()
 
   const [formData, setFormData] = useState({
     name: "",
@@ -19,7 +21,14 @@ const Register = () => {
     password: "",
     is_available: true,
   });
-
+  useEffect(()=>{
+    const token = localStorage.getItem("auth-token");
+    if (token) {
+      // Not logged in → redirect to login
+      navigate("/");
+      return;
+    }
+  })
   const handleChange = (e) => {
     const { name, value, type, checked } = e.target;
     setFormData({
@@ -28,19 +37,36 @@ const Register = () => {
     });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
+    console.log('signup function executed', formData)
     e.preventDefault();
-    console.log("Registered Donor:", formData);
+    let responseData;
+    await fetch('https://bloodcampus-server.vercel.app/api/user/register', {
+      method: 'POST',
+      headers: {
+        Accept: 'application/form-data',
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(formData)
+    }).then((response) => response.json()).then((data) => responseData = data)
+
+    if (responseData.success) {
+      localStorage.setItem('auth-token', responseData.token)
+      window.location.replace('/')
+    }
+    else {
+      alert(responseData.errors)
+    }
   };
 
   return (
     <section className="w-full min-h-screen p-4 flex items-center justify-center">
-      <motion.div initial={{opacity: 0, scale: 0.9}} whileInView={{opacity:1, scale:1}} transition={{duration:0.6}} className="w-full max-w-lg shadow-lg bg-white/5 rounded-2xl p-8 flex flex-col items-center">
+      <motion.div initial={{ opacity: 0, scale: 0.9 }} whileInView={{ opacity: 1, scale: 1 }} transition={{ duration: 0.6 }} className="w-full max-w-lg shadow-lg bg-white/5 rounded-2xl p-8 flex flex-col items-center">
         <h1 className="text-3xl font-bold  mb-2">Become a Donor</h1>
         <p className="mb-6 text-gray-700">Donate blood, save a life ❤️</p>
 
-        <form  className="w-full text-black/50 flex flex-col gap-4" onSubmit={handleSubmit}>
-          
+        <form className="w-full text-black/50 flex flex-col gap-4" onSubmit={handleSubmit}>
+
           {/* Name */}
           <div>
             <label htmlFor="name" className="block mb-1 font-medium">Full Name</label>
