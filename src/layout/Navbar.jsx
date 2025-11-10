@@ -1,27 +1,25 @@
 import React from 'react'
-import {Link, useNavigate} from "react-router-dom"
+import axios from 'axios';
+import {Link} from "react-router-dom"
+import { useContext } from 'react';
+import { ThemeContext } from '../Component/ThemeProvider';
 
 const Navbar = () => {
-  const navigate = useNavigate();
+  const {api, isLogin, setIsLogin}= useContext(ThemeContext)
 
   const handleLogout = async () => {
     try {
-      await fetch('https://bloodcampus-server.vercel.app/api/user/logout', {
-        method: 'POST',
-        headers: {
-          Accept: 'application/json',
-          'Content-Type': 'application/json',
-          'auth-token': localStorage.getItem('auth-token') // optional, if backend needs it
-        }
-      });
-
-      // Clear token from localStorage
-      localStorage.removeItem('auth-token');
-
-      // Redirect to login page
-      navigate('/login');
+      const response= await axios.post(`${api}/user/logout`, {}, {withCredentials: true})
+      if(response.data.sucess){
+        setIsLogin(true)
+      }else{
+        setIsLogin(true)
+      }
+      window.location.replace('/login')
+      alert(response.data.message)
     } catch (error) {
-      console.error("Logout error:", error);
+      alert(error?.response?.data?.message || 'Failed to logout')
+      console.log(error)
     }
   };
 
@@ -32,7 +30,7 @@ const Navbar = () => {
         <div className='w-auto h-14 flex flex-row items-center justify-center lg:gap-4'>
           <Link className='h-14 px-2 lg:px-8 flex items-center justify-center font-semibold hover:border-b-2' to="/donors">Donors</Link>
           <Link className='h-14 px-2 lg:px-8 flex items-center justify-center font-semibold hover:border-b-2' to="/about">About</Link>
-          {localStorage.getItem('auth-token')? <p className='h-10 px-2 lg:px-8 flex items-center justify-center  bg-green-500 rounded-lg font-bold cursor-pointer' onClick={handleLogout} >Logout</p>
+          {isLogin? <p className='h-10 px-2 lg:px-8 flex items-center justify-center  bg-green-500 rounded-lg font-bold cursor-pointer' onClick={handleLogout} >Logout</p>
           : <Link className='h-10 px-2 lg:px-8 flex items-center justify-center  bg-green-500 rounded-lg font-bold' to="/login">LogIn</Link>
           }
         </div>
