@@ -1,8 +1,12 @@
 import React, { useState } from "react";
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
+import axios from "axios";
+import { useContext } from "react";
+import { ThemeContext } from "../Component/ThemeProvider";
 
 const Login = () => {
+  const { api } = useContext(ThemeContext)
   const [formData, setFormData] = useState({
     email: "",
     password: "",
@@ -13,31 +17,19 @@ const Login = () => {
     setFormData({ ...formData, [name]: value });
   };
 
-const handleSubmit = async (e) => {
-  e.preventDefault();
-  try {
-    const response = await fetch('https://bloodcampus-server.vercel.app/api/user/login', {
-      method: 'POST',
-      headers: {
-        Accept: 'application/json',
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify(formData)
-    });
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      const response = await axios.post(`${api}/user/login`, formData, { withCredentials: true })
+      alert(response.data.message)
+      if (response.data.success) {
+        window.location.replace('/')
+      }
+    } catch (error) {
+      alert(error?.response?.data?.message || 'failed to log in')
 
-    const responseData = await response.json();
-
-    if (responseData.success) {
-      localStorage.setItem('auth-token', responseData.token); // ✅ fixed
-      window.location.replace('/');
-    } else {
-      alert(responseData.message || "Login failed");
     }
-  } catch (error) {
-    console.error("Login request error:", error);
-    alert("Something went wrong");
-  }
-};
+  };
 
 
   return (
