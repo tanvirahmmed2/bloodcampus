@@ -1,9 +1,9 @@
 import React, { useState, useContext } from "react";
 import { motion } from "framer-motion";
+import axios from 'axios'
 import { Link, useNavigate } from "react-router-dom";
 import UsePageTitle from "../Component/UsePageTitle";
 import { ThemeContext } from "../Component/ThemeProvider";
-import { useEffect } from "react";
 
 const Register = () => {
   UsePageTitle("Register Donor");
@@ -21,14 +21,9 @@ const Register = () => {
     password: "",
     is_available: true,
   });
-  useEffect(()=>{
-    const token = localStorage.getItem("auth-token");
-    if (token) {
-      // Not logged in → redirect to login
-      navigate("/");
-      return;
-    }
-  })
+ 
+  
+
   const handleChange = (e) => {
     const { name, value, type, checked } = e.target;
     setFormData({
@@ -37,26 +32,23 @@ const Register = () => {
     });
   };
 
-  const handleSubmit = async (e) => {
-    console.log('signup function executed', formData)
-    e.preventDefault();
-    let responseData;
-    await fetch(`${api}/user/register`, {
-      method: 'POST',
-      headers: {
-        Accept: 'application/form-data',
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify(formData)
-    }).then((response) => response.json()).then((data) => responseData = data)
 
-    if (responseData.success) {
-      localStorage.setItem('auth-token', responseData.token)
-      window.location.replace('/')
+
+  const handleSubmit = async (e) => {
+
+    e.preventDefault();
+    try {
+      const response= await axios.post(`${api}/user/register`, formData, {withCredentials: true} )
+      alert(response.data.message)
+      if(response.data.success){
+        navigate('/login')
+      }
+    } catch (error) {
+      alert(error?.response?.data?.message || 'failed to register')
+      
     }
-    else {
-      alert(responseData.errors)
-    }
+   
+    
   };
 
   return (
@@ -67,7 +59,7 @@ const Register = () => {
 
         <form className="w-full text-black/50 flex flex-col gap-4" onSubmit={handleSubmit}>
 
-          {/* Name */}
+          
           <div>
             <label htmlFor="name" className="block mb-1 font-medium">Full Name</label>
             <input
@@ -81,7 +73,6 @@ const Register = () => {
             />
           </div>
 
-          {/* Email */}
           <div>
             <label htmlFor="email" className="block mb-1 font-medium">Email</label>
             <input
