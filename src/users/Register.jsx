@@ -7,7 +7,7 @@ import { useEffect } from "react";
 
 const Register = () => {
   UsePageTitle("Register Donor");
-  const { bloodgroups, districts } = useContext(ThemeContext);
+  const { bloodgroups, districts,api } = useContext(ThemeContext);
   const navigate=useNavigate()
 
   const [formData, setFormData] = useState({
@@ -41,7 +41,7 @@ const Register = () => {
     console.log('signup function executed', formData)
     e.preventDefault();
     let responseData;
-    await fetch('https://bloodcampus-server.vercel.app/api/user/register', {
+    await fetch(`${api}/user/register`, {
       method: 'POST',
       headers: {
         Accept: 'application/form-data',
