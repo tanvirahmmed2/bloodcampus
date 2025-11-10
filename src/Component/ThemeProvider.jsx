@@ -23,6 +23,7 @@ const bloodgroups = [
 export const ThemeContext = createContext();
 
 export const ThemeProvider = ({ children }) => {
+  const api= 'http://localhost:5000/api'
   const [donors, setDonors] = useState([]);
   const [loading, setLoading] = useState(true);
 
@@ -44,11 +45,13 @@ export const ThemeProvider = ({ children }) => {
     fetchDonors();
   }, []);
 
-  
+  const contextValue={
+    districts, bloodgroups, donors, setDonors, loading , api
+  }
 
 
   return (
-    <ThemeContext.Provider value={{ districts, bloodgroups, donors, setDonors, loading }}>
+    <ThemeContext.Provider value={contextValue}>
       {children}
     </ThemeContext.Provider>
   );
