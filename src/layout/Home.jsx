@@ -13,8 +13,8 @@ const Home = () => {
       <Intro/>
       <Featured/>
       <Link to='/donors' className='px-4 p-1 bg-green-600 rounded-xl'>Find Donors</Link>
-      <Contact/>
       <About/>
+      <Contact/>
     </section>
   )
 }
