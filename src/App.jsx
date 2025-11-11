@@ -14,6 +14,7 @@ import Admin from "./users/Admin";
 import ProtectedAdmin from "./Component/ProtectedAdmin";
 import ProtectedRoute from "./Component/ProtectedRoute";
 import ProtectedProfile from "./Component/ProtectedProfile";
+import DonorProfile from "./users/DonorProfile";
 
 
 function App() {
@@ -24,6 +25,7 @@ function App() {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/donors" element={<Donors />} />
+        <Route path="/donor/:id" element={<DonorProfile />} />
         <Route path="/about" element={<About/>} />
         <Route path="/login" element={<ProtectedRoute><Login/></ProtectedRoute>}/>
         <Route path="/register" element={<ProtectedRoute><Register/></ProtectedRoute>}/>
