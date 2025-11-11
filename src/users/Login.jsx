@@ -1,12 +1,13 @@
 import React, { useState } from "react";
 import { motion } from "framer-motion";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 import { useContext } from "react";
 import { ThemeContext } from "../Component/ThemeProvider";
 
 const Login = () => {
   const { api} = useContext(ThemeContext)
+  const navigate= useNavigate()
   const [formData, setFormData] = useState({
     email: "",
     password: "",
@@ -23,7 +24,7 @@ const Login = () => {
       const response = await axios.post(`${api}/user/login`, formData, { withCredentials: true })
       alert(response.data.message)
       if (response.data.success) {
-        window.location.replace('/')
+        return navigate('/profile')
       }
     } catch (error) {
       alert(error?.response?.data?.message || 'failed to log in')

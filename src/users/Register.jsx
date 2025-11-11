@@ -15,7 +15,7 @@ const Register = () => {
     email: "",
     bloodgroup: "",
     dateofbirth: "",
-    lastdonated: "",
+    nid: "",
     phone: "",
     district: "",
     password: "",
@@ -101,18 +101,17 @@ const Register = () => {
             </div>
 
             <div>
-              <label htmlFor="lastdonated" className="block mb-1 font-medium">Last Donated</label>
+              <label htmlFor="nid" className="block mb-1 font-medium">Last Donated</label>
               <input
-                type="date"
-                name="lastdonated"
-                value={formData.lastdonated}
+                type="Number"
+                name="nid"
+                value={formData.nid}
                 onChange={handleChange}
                 className="w-full px-3 py-2 rounded-lg border border-gray-300 outline-none focus:ring-2 focus:ring-red-400"
               />
             </div>
           </div>
 
-          {/* Blood Group */}
           <div>
             <label htmlFor="bloodgroup" className="block mb-1 font-medium">Blood Group</label>
             <select

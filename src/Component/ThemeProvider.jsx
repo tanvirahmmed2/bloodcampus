@@ -94,7 +94,8 @@ export const ThemeProvider = ({ children }) => {
 
   const contextValue = {
     districts, bloodgroups, donors, setDonors, loading, api,
-    user, setUser, isAdmin, setIsAdmin, isLogin, setIsLogin
+    user, setUser, isAdmin, setIsAdmin, isLogin, setIsLogin,
+    
   }
 
 
