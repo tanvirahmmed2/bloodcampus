@@ -1,32 +1,49 @@
 import React, { useEffect, useState } from 'react'
 
 const Footer = () => {
-
   const [year, setYear] = useState(new Date().getFullYear())
-  useEffect(()=>{
+
+  useEffect(() => {
     setYear(new Date().getFullYear())
-  },[])
+  }, [])
 
   return (
-    <section className='w-full h-auto p-2 overflow-x-hidden'>
-      <footer className='w-full h-auto p-4 bg-white/5 rounded-lg flex gap-6 flex-col md:flex-row items-center justify-around'>
-        <div className='w-auto flex flex-col items-center justify-center gap-2 text-lg font-semibold'>
-          <h1 className='text-xl font-bold'>Blood Campus</h1>
-          <p>A humanity organization</p>
+    <footer className="w-full bg-white text-black py-10 px-6 md:px-16">
+      <div className="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-10 md:gap-0 text-center md:text-left">
+
+        <div className="flex flex-col items-center md:items-start gap-2">
+          <h1 className="text-2xl font-bold  tracking-wide">Blood Campus</h1>
+          <p className=" text-sm">A humanity organization</p>
         </div>
-        <div className='w-auto flex flex-col items-center justify-center '>
-          <p>Beware of scams & frauds</p>
-          <p>Any kind of money transaction is strictly prohibited</p>
-          <p>Donate blood & save life</p>
-          <p>Stand with humanity</p>
-          <p>be kind to people and animals</p>
+
+        <div className="text-sm flex flex-col gap-1  max-w-md leading-relaxed">
+          <p>Beware of scams and frauds.</p>
+          <p>Any kind of money transaction is strictly prohibited.</p>
+          <p>Donate blood and save lives.</p>
+          <p>Stand with humanity.</p>
+          <p>Be kind to people and animals.</p>
         </div>
-        <div className='w-auto flex flex-col items-center justify-center gap-2 text-lg font-semibold'>
-          <p>Alrights are reserved {year}</p>
-          <p>Project of <a href="https://www.disibin.com" className=' font-bold text-green-500'>DisiBin</a></p>
+
+        <div className="flex flex-col items-center md:items-end gap-2">
+          <p className=" text-sm">
+            © {year} All rights reserved
+          </p>
+          <p className="text-sm">
+            Project of{' '}
+            <a
+              href="https://www.disibin.com"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="font-semibold text-green-400 hover:text-green-500 transition-colors"
+            >
+              DisiBin
+            </a>
+          </p>
         </div>
-      </footer>
-    </section>
+      </div>
+
+      
+    </footer>
   )
 }
 
