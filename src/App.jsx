@@ -8,9 +8,10 @@ import Register from "./users/Register";
 import About from "./pages/About";
 import Donors from "./pages/Donors";
 import Error from "./pages/Error";
-import DashBoard from "./pages/DashBoard";
 import Profile from "./users/Profile";
 import Contact from "./pages/Contact";
+import Admin from "./users/Admin";
+import ProtectedAdmin from "./Component/ProtectedAdmin";
 
 
 function App() {
@@ -26,7 +27,7 @@ function App() {
         <Route path="/register" element={<Register/>}/>
         <Route path="/contact" element={<Contact/>}/>
         <Route path="/profile" element={<Profile/>}/>
-        <Route path="/dashboard" element={<DashBoard/>}/>
+        <Route path="/admin" element={<ProtectedAdmin><Admin/></ProtectedAdmin>}/>
         <Route path="/*" element={<Error/>}/>
       </Routes>
 
