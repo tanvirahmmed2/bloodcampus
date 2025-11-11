@@ -12,6 +12,8 @@ import Profile from "./users/Profile";
 import Contact from "./pages/Contact";
 import Admin from "./users/Admin";
 import ProtectedAdmin from "./Component/ProtectedAdmin";
+import ProtectedRoute from "./Component/ProtectedRoute";
+import ProtectedProfile from "./Component/ProtectedProfile";
 
 
 function App() {
@@ -23,10 +25,10 @@ function App() {
         <Route path="/" element={<Home />} />
         <Route path="/donors" element={<Donors />} />
         <Route path="/about" element={<About/>} />
-        <Route path="/login" element={<Login/>}/>
-        <Route path="/register" element={<Register/>}/>
+        <Route path="/login" element={<ProtectedRoute><Login/></ProtectedRoute>}/>
+        <Route path="/register" element={<ProtectedRoute><Register/></ProtectedRoute>}/>
         <Route path="/contact" element={<Contact/>}/>
-        <Route path="/profile" element={<Profile/>}/>
+        <Route path="/profile" element={<ProtectedProfile><Profile/></ProtectedProfile>}/>
         <Route path="/admin" element={<ProtectedAdmin><Admin/></ProtectedAdmin>}/>
         <Route path="/*" element={<Error/>}/>
       </Routes>

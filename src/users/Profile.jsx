@@ -2,9 +2,11 @@ import React from 'react'
 import axios from 'axios';
 import { useContext } from 'react';
 import { ThemeContext } from '../Component/ThemeProvider';
+import { useNavigate } from 'react-router-dom';
 
 const Profile = () => {
   const {api, setIsLogin, user, isLogin}= useContext(ThemeContext)
+  const navigate= useNavigate()
 
     const handleLogout = async () => {
     try {
@@ -23,11 +25,17 @@ const Profile = () => {
   };
 
   if(!isLogin) {
-    window.location.replace('/login')
+    return navigate('/login')
   }
 
+  const {name}= user
   return (
-    <div>
+    <div className='w-full min-h-screen flex flex-col items-center'>
+      <div>
+        <div>
+          <p>{name}</p>
+        </div>
+      </div>
       <button onClick={handleLogout}>Logout</button>
     </div>
   )
