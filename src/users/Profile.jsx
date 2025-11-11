@@ -4,6 +4,7 @@ import { useContext } from 'react';
 import { ThemeContext } from '../Component/ThemeProvider';
 import { useNavigate } from 'react-router-dom';
 import { CgProfile } from "react-icons/cg";
+import { MdDeleteOutline } from "react-icons/md";
 
 const Profile = () => {
   const [update, setUpdate] = useState(false)
@@ -27,7 +28,7 @@ const Profile = () => {
   };
 
 
-  const { name, email, lastdonated, dateofbirth, isAvailable, bloodgroup, district, nid } = user
+  const { name, email, lastdonated, dateofbirth, isAvailable, bloodgroup, district, nid, messages } = user
 
   const [formData, setFormData] = useState({
     name: name,
@@ -99,6 +100,23 @@ const Profile = () => {
 
 
 
+        </div>
+      }
+
+      {
+        messages !== null && <div>
+          {
+            messages.map((e)=>{
+              const {name, number, district,message, _id}= e
+              return <div key={_id}>
+                <h1>{name}</h1>
+                <p>{message}</p>
+                <p>{number}</p>
+                <p>{district}</p>
+                <button><MdDeleteOutline/></button>
+              </div>
+            })
+          }
         </div>
       }
       <button onClick={handleLogout} className='bg-black text-white p-1 px-3 rounded-md'>Logout</button>
