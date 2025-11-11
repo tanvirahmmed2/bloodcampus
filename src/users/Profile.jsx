@@ -27,7 +27,7 @@ const Profile = () => {
   };
 
 
-  const { name, email, lastdonated, dateofbirth, isAvailable, bloodgroup, district } = user
+  const { name, email, lastdonated, dateofbirth, isAvailable, bloodgroup, district, nid } = user
 
   const [formData, setFormData] = useState({
     name: name,
@@ -68,6 +68,7 @@ const Profile = () => {
             <p>Blood Group: {bloodgroup}</p>
             <p>Date of Birth: {dateofbirth.slice(0, 10)}</p>
             <p>District: {district}</p>
+            <p>Nid Number: {nid}</p>
             <p>{lastdonated !== null ? <span></span> : <span>Last donted: {lastdonated}</span>}</p>
           </div>
           <button onClick={() => setUpdate(!update)} className='bg-red-600 text-white p-1 px-3 rounded-lg'>Update Profile</button>
