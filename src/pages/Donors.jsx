@@ -1,4 +1,4 @@
-import React, { useContext,  } from 'react';
+import React, { useContext, } from 'react';
 import { motion } from 'framer-motion'
 import { Link, } from 'react-router-dom';
 import { ThemeContext } from '../Component/ThemeProvider';
@@ -35,8 +35,8 @@ const Donors = () => {
         <button type='submit' className='w-full md:w-auto font-semibold cursor-pointer px-3 p-1 bg-white text-red-500 rounded-lg'>Search</button>
       </form>
 
-      <div className='w-full h-screen border-2 border-white/20 flex flex-wrap justify-center  gap-4 overflow-y-scroll overflow-x-hidden p-6  rounded-lg'>
-          {loading? <p>loading</p>: <></>}
+      <div className='w-full min-h-screen border-2 border-white/20 flex flex-wrap justify-center  gap-4 overflow-x-hidden p-6  rounded-lg'>
+        {loading ? <p>loading</p> : <></>}
 
         {donors.map((donor) => {
           const { id, name, bloodgroup, district, isAvailable, phone } = donor;
