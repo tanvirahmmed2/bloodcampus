@@ -9,6 +9,9 @@ import { useEffect } from 'react';
 
 const Profile = () => {
   const [update, setUpdate] = useState(false)
+  const [changepass, setChnagePass] = useState(false)
+
+
   const { api, setIsLogin, user, isLogin, districts, upazillas } = useContext(ThemeContext)
   const navigate = useNavigate()
 
@@ -29,7 +32,7 @@ const Profile = () => {
   };
 
 
-  const {_id, name, email, lastdonated, dateofbirth, isAvailable, bloodgroup, district, nid, messages, upazilla } = user
+  const { _id, name, email, lastdonated, dateofbirth, isAvailable, bloodgroup, district, nid, messages, upazilla } = user
 
   const [formData, setFormData] = useState({
     name: name,
@@ -39,12 +42,19 @@ const Profile = () => {
     upazilla: upazilla
   })
 
+  const [changePassData, setChangePassData] = useState({
+    id:_id,
+    oldpass: '',
+    newpass: ''
+  })
+
   const handleChange = (e) => {
     const { name, value } = e.target
     setFormData((prev) => ({ ...prev, [name]: value }))
   }
 
   const updateProfile = async (e) => {
+    e.preventDefault()
     try {
       const response = await axios.put(`${api}/user/update`, formData, { withCredentials: true })
       alert(response.data.message)
@@ -55,15 +65,34 @@ const Profile = () => {
   }
 
 
-  const changeAvailablity=async (id) => {
+  const changeAvailablity = async (id) => {
     try {
-      const response= await axios.post(`${api}/user/changeavailability`, {id}, {withCredentials: true})
+      const response = await axios.post(`${api}/user/changeavailability`, { id }, { withCredentials: true })
       alert(response.data.message)
     } catch (error) {
       alert(error?.response?.data?.message || "Failed to change availability")
       
+
     }
-    
+
+  }
+
+  const handlePassCahnge = (e) => {
+    const { name, value } = e.target
+    setChangePassData((prev) => ({ ...prev, [name]: value }))
+  }
+
+  const changePassword = async (e) => {
+    e.preventDefault()
+    try {
+      const response = await axios.post(`${api}/user/changepassword`, changePassData, { withCredentials: true })
+      alert(response.data.message)
+      setChnagePass(false)
+    } catch (error) {
+      alert(error?.response?.data?.message || "failed to change passwordd")
+      console.log(error)
+    }
+
   }
 
   useEffect(() => {
@@ -87,7 +116,10 @@ const Profile = () => {
             <p>Nid Number: {nid}</p>
             <p>{lastdonated !== null ? <span></span> : <span>Last donted: {lastdonated}</span>}</p>
           </div>
-          <button onClick={() => setUpdate(!update)} className='bg-red-600 text-white p-1 px-3 rounded-lg'>Update Profile</button>
+          <div className='flex flex-col gap-2'>
+            <button onClick={() => setUpdate(!update)} className='bg-red-600 text-white p-1 px-3 rounded-lg'>Update Profile</button>
+            <button onClick={() => setChnagePass(!changepass)} className='bg-black text-white p-1 px-3 rounded-md'>Change Password</button>
+          </div>
         </div>
       </div>
       {
@@ -118,11 +150,28 @@ const Profile = () => {
               </select>
             </div>
             <button type='submit' className='bg-black text-white p-1 px-3 rounded-md'>Save</button>
+
           </form>
 
 
-          <button onClick={()=> changeAvailablity(_id)} className='bg-green-500 text-white p-1 px-3 rounded-md'>{isAvailable ? <span>Make unavailabe</span> : <span>Make available</span>}</button>
+          <button onClick={() => changeAvailablity(_id)} className='bg-green-500 text-white p-1 px-3 rounded-md'>{isAvailable ? <span>Make unavailabe</span> : <span>Make available</span>}</button>
 
+        </div>
+      }
+
+      {
+        changepass && <div className='w-full flex flex-col items-center justify-center bg-white text-red-600 py-4 gap-6'>
+          <form onSubmit={changePassword} className='flex flex-col gap-6'>
+            <div className='flex flex-col '>
+              <label htmlFor="oldpass" className='text-black'>Current Password</label>
+              <input type="text" id='oldpass' name='oldpass' value={changePassData.oldpass} onChange={handlePassCahnge} className='outline-none border-2 px-2 p-1 rounded-md' />
+            </div>
+            <div className='flex flex-col '>
+              <label htmlFor="newpass" className='text-black'>New Password</label>
+              <input type="text" id='newpass' name='newpass' value={changePassData.newpass} onChange={handlePassCahnge} className='outline-none border-2 px-2 p-1 rounded-md' />
+            </div>
+            <button type='submit' className='bg-black text-white p-1 px-3 rounded-md'>Save</button>
+          </form>
         </div>
       }
 
