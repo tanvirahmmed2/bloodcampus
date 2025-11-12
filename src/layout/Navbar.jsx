@@ -13,6 +13,7 @@ const Navbar = () => {
       <nav className='w-full h-14 bg-white/20 flex rounded-lg flex-row items-center justify-around'>
         <a href="/" className='font-bold text-lg lg:text-3xl'>Blood Campus</a>
         <div className='w-auto h-14 flex flex-row items-center justify-center '>
+          <Link className='h-14 px-2 lg:px-8 flex items-center justify-center font-semibold hover:border-b-2' to="/finddonor">Find Donor</Link>
           <Link className='h-14 px-2 lg:px-8 flex items-center justify-center font-semibold hover:border-b-2' to="/donors">Donors</Link>
           <Link className='h-14 px-2 lg:px-8 flex items-center justify-center font-semibold hover:border-b-2' to="/about">About</Link>
           <Link className='h-14 px-2 lg:px-8 flex items-center justify-center font-semibold hover:border-b-2' to="/contact">Contact</Link>

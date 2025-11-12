@@ -37,13 +37,13 @@ const Donors = () => {
         <Link className='p-1 px-3 rounded-lg w-full font-bold text-lg hover:bg-white/10' to="/about">About</Link>
       </div>
 
-      <div className='w-full min-h-screen border-2 border-white/20 grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 justify-items-center gap-4 p-2 rounded-lg'>
+      <div className='w-full min-h-screen border-2 border-white/20 grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4  gap-4 p-2 rounded-lg'>
         {loading ? <p>loading</p> : <></>}
 
-        {donors.map((donor) => {
-          const { _id, name, bloodgroup, district, isAvailable, phone } = donor;
+        {donors.slice(-50).map((donor) => {
+          const { _id, name, bloodgroup, district, isAvailable, } = donor;
           return (
-            <motion.div initial={{ opacity: 0, scale: 0.8 }} whileInView={{ opacity: 1, scale: 1 }} transition={{ duration: 0.6 }} key={_id} className='w-full backdrop-blur-md shadow-sm shadow-white h-[180px] rounded-lg p-4 flex flex-col justify-between cursor-pointer'>
+            <motion.div initial={{ opacity: 0, scale: 0.8 }} whileInView={{ opacity: 1, scale: 1 }} transition={{ duration: 0.6 }} key={_id} className='w-full backdrop-blur-md shadow-sm bg-red-400 shadow-white h-44 rounded-lg p-4 flex flex-col justify-between cursor-pointer'>
 
 
               <div className='w-full flex items-center justify-between'>
@@ -56,7 +56,7 @@ const Donors = () => {
 
                 {
                   isAvailable ? <div className='w-full flex items-center justify-between'>
-                    <a className={`px-3 p-1 rounded-lg ${isAvailable ? "bg-green-500" : "bg-red-500 opacity-25"} `} href={`tel:${phone}`}>Call</a>
+                    <Link to={`/donor/${_id}`}>View</Link>
                     <button onClick={() => handleRequest(_id)}>Request</button>
                   </div> : <p className='italic'>not available</p>
                 }

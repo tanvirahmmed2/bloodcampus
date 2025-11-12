@@ -1,6 +1,6 @@
 import React from 'react'
 
-const Featured = () => {
+const FindDonor = () => {
   return (
     <div>
       
@@ -8,4 +8,4 @@ const Featured = () => {
   )
 }
 
-export default Featured
+export default FindDonor

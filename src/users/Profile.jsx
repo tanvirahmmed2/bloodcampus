@@ -5,10 +5,11 @@ import { ThemeContext } from '../Component/ThemeProvider';
 import { useNavigate } from 'react-router-dom';
 import { CgProfile } from "react-icons/cg";
 import { MdDeleteOutline } from "react-icons/md";
+import { useEffect } from 'react';
 
 const Profile = () => {
   const [update, setUpdate] = useState(false)
-  const { api, setIsLogin, user, isLogin, districts } = useContext(ThemeContext)
+  const { api, setIsLogin, user, isLogin, districts, upazillas } = useContext(ThemeContext)
   const navigate = useNavigate()
 
   const handleLogout = async () => {
@@ -28,13 +29,14 @@ const Profile = () => {
   };
 
 
-  const { name, email, lastdonated, dateofbirth, isAvailable, bloodgroup, district, nid, messages } = user
+  const {_id, name, email, lastdonated, dateofbirth, isAvailable, bloodgroup, district, nid, messages, upazilla } = user
 
   const [formData, setFormData] = useState({
     name: name,
     lastdonated: lastdonated,
-    isavilable: isAvailable,
+    isAvilable: isAvailable,
     district: district,
+    upazilla: upazilla
   })
 
   const handleChange = (e) => {
@@ -51,9 +53,20 @@ const Profile = () => {
     }
 
   }
-  if (!isLogin) {
-    return navigate('/login')
+  const changeAvailablity=async (id) => {
+    try {
+      const response= await axios.post(`${api}/user/changeavailability`, {id}, {withCredentials: true})
+      alert(response.data.message)
+    } catch (error) {
+      alert(error?.response?.data?.message || "Failed to change availability")
+      
+    }
+    
   }
+
+  useEffect(() => {
+    if (!isLogin) navigate('/login');
+  }, [isLogin, navigate]);
 
 
   return (
@@ -76,7 +89,7 @@ const Profile = () => {
         </div>
       </div>
       {
-        update && <div className='w-full flex flex-col items-center justify-center bg-white text-red-600 py-4'>
+        update && <div className='w-full flex flex-col items-center justify-center bg-white text-red-600 py-4 gap-6'>
           <form onSubmit={updateProfile} className='flex flex-col gap-6'>
             <div className='flex flex-col '>
               <label htmlFor="name" className='text-black'>Name</label>
@@ -90,7 +103,15 @@ const Profile = () => {
               <label htmlFor="district" className='text-black'>District</label>
               <select name="district" id="district" value={formData.district} onChange={handleChange}>
                 {
-                  districts.map((e)=>{ return <option key={e}>{e}</option>})
+                  districts.map((e) => { return <option key={e}>{e}</option> })
+                }
+              </select>
+            </div>
+            <div className='flex flex-col '>
+              <label htmlFor="upazilla" className='text-black'>Upazilla</label>
+              <select name="upazilla" id="upazilla" value={formData.upazilla} onChange={handleChange}>
+                {
+                  upazillas.map((e) => { return <option key={e}>{e}</option> })
                 }
               </select>
             </div>
@@ -98,7 +119,7 @@ const Profile = () => {
           </form>
 
 
-
+          <button onClick={()=> changeAvailablity(_id)} className='bg-green-500 text-white p-1 px-3 rounded-md'>{isAvailable ? <span>Make unavailabe</span> : <span>Make available</span>}</button>
 
         </div>
       }
@@ -106,14 +127,14 @@ const Profile = () => {
       {
         messages !== null && <div>
           {
-            messages.map((e)=>{
-              const {name, number, district,message, _id}= e
+            messages.map((e) => {
+              const { name, number, district, message, _id } = e
               return <div key={_id}>
                 <h1>{name}</h1>
                 <p>{message}</p>
                 <p>{number}</p>
                 <p>{district}</p>
-                <button><MdDeleteOutline/></button>
+                <button><MdDeleteOutline /></button>
               </div>
             })
           }

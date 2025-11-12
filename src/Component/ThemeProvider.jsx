@@ -17,7 +17,7 @@ const districts = [
   "Habiganj", "Moulvibazar", "Sunamganj", "Sylhet"
 ];
 
-const upazilas = [
+const upazillas = [
   "Abhaynagar",
   "Adamdighi",
   "Aditmari",
@@ -574,7 +574,7 @@ export const ThemeProvider = ({ children }) => {
   }, [])
 
   const contextValue = {
-    districts,upazilas, bloodgroups, donors, setDonors, loading, api,
+    districts,upazillas, bloodgroups, donors, setDonors, loading, api,
     user, setUser, isAdmin, setIsAdmin, isLogin, setIsLogin,
 
   }
