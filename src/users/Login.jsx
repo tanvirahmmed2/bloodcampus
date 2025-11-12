@@ -23,9 +23,8 @@ const Login = () => {
     try {
       const response = await axios.post(`${api}/user/login`, formData, { withCredentials: true })
       alert(response.data.message)
-      if (response.data.success) {
         return navigate('/profile')
-      }
+      
     } catch (error) {
       alert(error?.response?.data?.message || 'failed to log in')
 

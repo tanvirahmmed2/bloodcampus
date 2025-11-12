@@ -53,6 +53,8 @@ const Profile = () => {
     }
 
   }
+
+
   const changeAvailablity=async (id) => {
     try {
       const response= await axios.post(`${api}/user/changeavailability`, {id}, {withCredentials: true})
