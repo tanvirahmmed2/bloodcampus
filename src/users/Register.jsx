@@ -7,7 +7,7 @@ import { ThemeContext } from "../Component/ThemeProvider";
 
 const Register = () => {
   UsePageTitle("Register Donor");
-  const { bloodgroups, districts,api } = useContext(ThemeContext);
+  const { bloodgroups, districts,api , upazilas} = useContext(ThemeContext);
   const navigate=useNavigate()
 
   const [formData, setFormData] = useState({
@@ -15,9 +15,11 @@ const Register = () => {
     email: "",
     bloodgroup: "",
     dateofbirth: "",
+    lastdoneted:'',
     nid: "",
     phone: "",
     district: "",
+    upazila:'',
     password: "",
     is_available: true,
   });
@@ -25,11 +27,8 @@ const Register = () => {
   
 
   const handleChange = (e) => {
-    const { name, value, type, checked } = e.target;
-    setFormData({
-      ...formData,
-      [name]: type === "checkbox" ? checked : value,
-    });
+    const { name, value, } = e.target;
+    setFormData((prev)=>({...prev, [name]:value}));
   };
 
 
@@ -99,17 +98,19 @@ const Register = () => {
                 className="w-full px-3 py-2 rounded-lg border border-gray-300 outline-none focus:ring-2 focus:ring-red-400"
               />
             </div>
-
+            
             <div>
-              <label htmlFor="nid" className="block mb-1 font-medium">Last Donated</label>
+              <label htmlFor="lastdoneted" className="block mb-1 font-medium">Last Doneted (if applicable)</label>
               <input
-                type="Number"
-                name="nid"
-                value={formData.nid}
+                type="date"
+                name="lastdoneted"
+                value={formData.lastdoneted}
                 onChange={handleChange}
                 className="w-full px-3 py-2 rounded-lg border border-gray-300 outline-none focus:ring-2 focus:ring-red-400"
               />
             </div>
+
+            
           </div>
 
           <div>
@@ -154,6 +155,23 @@ const Register = () => {
             >
               <option value="">Select District</option>
               {districts.map((d) => (
+                <option key={d} value={d}>{d}</option>
+              ))}
+            </select>
+          </div>
+          
+          
+          <div>
+            <label htmlFor="district" className="block mb-1 font-medium">Home District</label>
+            <select
+              name="upazila"
+              value={formData.upazila}
+              onChange={handleChange}
+              required
+              className="w-full px-3 py-2 rounded-lg border border-gray-300 outline-none focus:ring-2 focus:ring-red-400"
+            >
+              <option value="">Select Upazilla</option>
+              {upazilas.map((d) => (
                 <option key={d} value={d}>{d}</option>
               ))}
             </select>
