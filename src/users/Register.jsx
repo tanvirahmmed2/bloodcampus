@@ -7,28 +7,25 @@ import { ThemeContext } from "../Component/ThemeProvider";
 
 const Register = () => {
   UsePageTitle("Register Donor");
-  const { bloodgroups, districts,api , upazilas} = useContext(ThemeContext);
-  const navigate=useNavigate()
+  const { bloodgroups, districts, api, upazilas } = useContext(ThemeContext);
+  const navigate = useNavigate()
 
   const [formData, setFormData] = useState({
     name: "",
     email: "",
     bloodgroup: "",
     dateofbirth: "",
-    lastdoneted:'',
-    nid: "",
     phone: "",
     district: "",
-    upazila:'',
+    upazilla: '',
     password: "",
-    is_available: true,
   });
- 
-  
+
+
 
   const handleChange = (e) => {
     const { name, value, } = e.target;
-    setFormData((prev)=>({...prev, [name]:value}));
+    setFormData((prev) => ({ ...prev, [name]: value }));
   };
 
 
@@ -37,17 +34,18 @@ const Register = () => {
 
     e.preventDefault();
     try {
-      const response= await axios.post(`${api}/user/register`, formData, {withCredentials: true} )
+      const response = await axios.post(`${api}/user/register`, formData, { withCredentials: true })
       alert(response.data.message)
-      if(response.data.success){
+      if (response.data.success) {
         navigate('/login')
       }
     } catch (error) {
+      console.log(error)
       alert(error?.response?.data?.message || 'failed to register')
-      
+
     }
-   
-    
+
+
   };
 
   return (
@@ -58,7 +56,7 @@ const Register = () => {
 
         <form className="w-full text-black/50 flex flex-col gap-4" onSubmit={handleSubmit}>
 
-          
+
           <div>
             <label htmlFor="name" className="block mb-1 font-medium">Full Name</label>
             <input
@@ -85,34 +83,19 @@ const Register = () => {
             />
           </div>
 
-          {/* Date of Birth & Last Donated */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-            <div>
-              <label htmlFor="dateofbirth" className="block mb-1 font-medium">Date of Birth</label>
-              <input
-                type="date"
-                name="dateofbirth"
-                value={formData.dateofbirth}
-                onChange={handleChange}
-                required
-                className="w-full px-3 py-2 rounded-lg border border-gray-300 outline-none focus:ring-2 focus:ring-red-400"
-              />
-            </div>
-            
-            <div>
-              <label htmlFor="lastdoneted" className="block mb-1 font-medium">Last Doneted (if applicable)</label>
-              <input
-                type="date"
-                name="lastdoneted"
-                value={formData.lastdoneted}
-                onChange={handleChange}
-                className="w-full px-3 py-2 rounded-lg border border-gray-300 outline-none focus:ring-2 focus:ring-red-400"
-              />
-            </div>
 
-            
+
+          <div>
+            <label htmlFor="dateofbirth" className="block mb-1 font-medium">Date of Birth</label>
+            <input
+              type="date"
+              name="dateofbirth"
+              value={formData.dateofbirth}
+              onChange={handleChange}
+              required
+              className="w-full px-3 py-2 rounded-lg border border-gray-300 outline-none focus:ring-2 focus:ring-red-400"
+            />
           </div>
-
           <div>
             <label htmlFor="bloodgroup" className="block mb-1 font-medium">Blood Group</label>
             <select
@@ -159,13 +142,13 @@ const Register = () => {
               ))}
             </select>
           </div>
-          
-          
+
+
           <div>
-            <label htmlFor="district" className="block mb-1 font-medium">Home District</label>
+            <label htmlFor="upazilla" className="block mb-1 font-medium">Upazilla</label>
             <select
-              name="upazila"
-              value={formData.upazila}
+              name="upazilla"
+              value={formData.upazilla}
               onChange={handleChange}
               required
               className="w-full px-3 py-2 rounded-lg border border-gray-300 outline-none focus:ring-2 focus:ring-red-400"
