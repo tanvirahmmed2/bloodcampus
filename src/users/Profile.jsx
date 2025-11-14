@@ -6,6 +6,7 @@ import { useNavigate } from 'react-router-dom';
 import { CgProfile } from "react-icons/cg";
 import { MdDeleteOutline } from "react-icons/md";
 import { useEffect } from 'react';
+import UsePageTitle from '../Component/UsePageTitle';
 
 const Profile = () => {
   const [update, setUpdate] = useState(false)
@@ -34,6 +35,7 @@ const Profile = () => {
 
   const { _id, name, email, phone, lastdonated, dateofbirth, isAvailable, bloodgroup, district, requests, upazilla } = user
 
+  UsePageTitle(name)
   const [formData, setFormData] = useState({
     name: name,
     lastdonated: lastdonated || '',

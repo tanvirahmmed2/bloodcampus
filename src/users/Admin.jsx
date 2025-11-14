@@ -5,15 +5,17 @@ import { ThemeContext } from '../Component/ThemeProvider'
 import { MdDeleteOutline } from "react-icons/md";
 import { useState } from 'react'
 import { useEffect } from 'react'
+import UsePageTitle from '../Component/UsePageTitle';
 
 
 const Admin = () => {
-  const { api, setNotification, donors } = useContext(ThemeContext)
+  const { api, setNotification, donors, districts } = useContext(ThemeContext)
   const [state, setState] = useState('message')
   const [messages, setMessages] = useState([])
-  const [newAdminEmail, setNewAdminEmail]= useState('')
-  const [banUserEmail, setBanUserEmail]= useState('')
-  const [deleteUserEmail, setDeleteUserEmail]= useState('')
+  const [newAdminEmail, setNewAdminEmail] = useState('')
+  const [banUserEmail, setBanUserEmail] = useState('')
+  const [deleteUserEmail, setDeleteUserEmail] = useState('')
+  UsePageTitle("Admin")
 
   const admins = donors.filter((e) => e.isAdmin)
 
@@ -32,51 +34,51 @@ const Admin = () => {
     fetchMessage()
   }, [api, setNotification])
 
-const addNewAdmin=async (e) => {
-  e.preventDefault()
-  try {
-    const response= await axios.post(`${api}/user/newaccess`, {newAdminEmail}, {withCredentials:true})
-    setNotification(response.data.message)
-  } catch (error) {
-    setNotification(error?.response?.data.message || "Failed to add new Admin")
-    console.log(error)
-  }
-  
-}
+  const addNewAdmin = async (e) => {
+    e.preventDefault()
+    try {
+      const response = await axios.post(`${api}/user/newaccess`, { newAdminEmail }, { withCredentials: true })
+      setNotification(response.data.message)
+    } catch (error) {
+      setNotification(error?.response?.data.message || "Failed to add new Admin")
+      console.log(error)
+    }
 
-const removeAdmin=async(id)=>{
-  try {
-    const response= await axios.post(`${api}/user/removeaccess`, {id}, {withCredentials: true})
-    setNotification(response.data.message)
-  } catch (error) {
-    setNotification(error?.response?.data?.message || "failed to remove admin")
-    
   }
-}
 
-const banUser=async (e) => {
-  e.preventDefault()
-  try {
-    const response= await axios.post(`${api}/user/banuser`, {banUserEmail}, {withCredentials: true})
-    setNotification(response.data.message)
-  } catch (error) {
-    setNotification(error?.response?.data?.message || "failed to ban/unban user")
-    
-  }
-  
-}
+  const removeAdmin = async (id) => {
+    try {
+      const response = await axios.post(`${api}/user/removeaccess`, { id }, { withCredentials: true })
+      setNotification(response.data.message)
+    } catch (error) {
+      setNotification(error?.response?.data?.message || "failed to remove admin")
 
-const deleteUser=async (e) => {
-  e.preventDefault()
-  try {
-    const response= await axios.post(`${api}/user/deleteuser`, {deleteUserEmail}, {withCredentials: true})
-    setNotification(response.data.message)
-  } catch (error) {
-    setNotification(error?.response?.data?.message || "failed to delete user")
-    
+    }
   }
-  
-}
+
+  const banUser = async (e) => {
+    e.preventDefault()
+    try {
+      const response = await axios.post(`${api}/user/banuser`, { banUserEmail }, { withCredentials: true })
+      setNotification(response.data.message)
+    } catch (error) {
+      setNotification(error?.response?.data?.message || "failed to ban/unban user")
+
+    }
+
+  }
+
+  const deleteUser = async (e) => {
+    e.preventDefault()
+    try {
+      const response = await axios.post(`${api}/user/deleteuser`, { deleteUserEmail }, { withCredentials: true })
+      setNotification(response.data.message)
+    } catch (error) {
+      setNotification(error?.response?.data?.message || "failed to delete user")
+
+    }
+
+  }
 
   return (
     <div className='w-full min-h-screen flex flex-col items-center justify-start gap-6 py-6 p-1'>
@@ -120,7 +122,7 @@ const deleteUser=async (e) => {
             <h1 className='text-xl font-semibold text-center'>Ban/Unban user</h1>
             <form onSubmit={banUser} className='flex flex-col gap-2'>
               <label htmlFor="email">Email</label>
-              <input type="email" name='email' id='email' className='px-3 p-1 rounded-md outline-none border-2' value={banUserEmail} onChange={(e)=> setBanUserEmail(e.target.value)}/>
+              <input type="email" name='email' id='email' className='px-3 p-1 rounded-md outline-none border-2' value={banUserEmail} onChange={(e) => setBanUserEmail(e.target.value)} />
               <button type='submit' className='px-3 p-1 rounded-lg bg-black text-white'>Submit</button>
             </form>
           </div>
@@ -128,10 +130,31 @@ const deleteUser=async (e) => {
             <h1 className='text-xl font-semibold text-center'>Delete user account</h1>
             <form onSubmit={deleteUser} className='flex flex-col gap-2'>
               <label htmlFor="email">Email</label>
-              <input type="email" name='email' id='email' className='px-3 p-1 rounded-md outline-none border-2' value={deleteUserEmail} onChange={(e)=> setDeleteUserEmail(e.target.value)}/>
+              <input type="email" name='email' id='email' className='px-3 p-1 rounded-md outline-none border-2' value={deleteUserEmail} onChange={(e) => setDeleteUserEmail(e.target.value)} />
               <button type='submit' className='px-3 p-1 rounded-lg bg-black text-white'>Submit</button>
             </form>
           </div>
+
+          <div className='w-full flex flex-col items-center justify-center gap-4 bg-white text-black py-4'>
+            <h1 className='text-xl font-semibold text-center'>User Statistics</h1>
+
+            <div className='w-full grid grid-cols-3 md:grid-cols-5 lg:grid-cols-7 gap-2'>
+              {districts.map((district) => {
+              const count = donors.filter((d) => d.district === district).length;
+
+              if (count === 0) return null;
+
+              return (
+                <div key={district} className='w-full flex flex-row gap-2 items-center justify-center bg-black text-white rounded-lg p-2'>
+                  {district}: {count} donor
+                </div>
+              );
+            })}
+
+            </div>
+          </div>
+
+
 
 
         </div>
@@ -147,7 +170,7 @@ const deleteUser=async (e) => {
                     <h1>{e.name}</h1>
                     <p>{e.phone}</p>
                     <p>{e.email}</p>
-                    <button onClick={()=> removeAdmin(e._id)} className='text-2xl '><MdDeleteOutline /></button>
+                    <button onClick={() => removeAdmin(e._id)} className='text-2xl '><MdDeleteOutline /></button>
                   </div>
                 })}
               </div> : <span>No admin available</span>
@@ -157,7 +180,7 @@ const deleteUser=async (e) => {
             <h1>Add New Admin</h1>
             <div className='w-auto flex flex-col gap-2'>
               <label htmlFor="email">Email</label>
-              <input type="email" name='email' id='email' value={newAdminEmail} onChange={(e)=>setNewAdminEmail(e.target.value)} className='outline-none px-2 p-1 rounded-lg border-2'/>
+              <input type="email" name='email' id='email' value={newAdminEmail} onChange={(e) => setNewAdminEmail(e.target.value)} className='outline-none px-2 p-1 rounded-lg border-2' />
 
             </div>
             <button type='submit' className='px-4 p-1 bg-black text-white rounded-lg'>Submit</button>

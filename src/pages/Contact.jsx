@@ -2,8 +2,10 @@ import React, { useContext } from 'react'
 import axios from 'axios'
 import { useState } from 'react';
 import { ThemeContext } from '../Component/ThemeProvider';
+import UsePageTitle from '../Component/UsePageTitle';
 
 const Contact = () => {
+  UsePageTitle('Contact')
   const { api , setNotification} = useContext(ThemeContext)
   const [formData, setFormData] = useState({
     name: '',

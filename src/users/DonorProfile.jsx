@@ -3,11 +3,13 @@ import { ThemeContext } from '../Component/ThemeProvider'
 import { useParams } from 'react-router-dom'
 import { IoCallOutline } from "react-icons/io5";
 import { CgProfile } from "react-icons/cg";
+import UsePageTitle from '../Component/UsePageTitle';
 
 const DonorProfile = () => {
   const { donors } = useContext(ThemeContext)
   const { id } = useParams()
   const data = donors.find((e) => e._id === id)
+  UsePageTitle(data.name)
   if(data=== null)return <p>Data not found</p>
   return (
     <div className='w-full flex flex-col items-center gap-6 min-h-screen p-1 bg-white/20'>
@@ -18,7 +20,6 @@ const DonorProfile = () => {
       </div>
       <div className='w-full bg-white text-black flex items-center justify-center py-4'>
         <div className=' flex flex-col gap-2'>
-          <p>Email: {data.email}</p>
           <p>District: {data.district}</p>
           <p>Upazilla: {data.upazilla}</p>
           {data.isAvailable && <div>

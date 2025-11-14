@@ -4,8 +4,10 @@ import { Link} from "react-router-dom";
 import axios from "axios";
 import { useContext } from "react";
 import { ThemeContext } from "../Component/ThemeProvider";
+import UsePageTitle from "../Component/UsePageTitle";
 
 const Login = () => {
+  UsePageTitle('Login')
   const { api, setNotification} = useContext(ThemeContext)
   const [formData, setFormData] = useState({
     email: "",
