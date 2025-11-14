@@ -11,6 +11,8 @@ const Admin = () => {
   const { api, setNotification, donors } = useContext(ThemeContext)
   const [state, setState] = useState('message')
   const [messages, setMessages] = useState([])
+  const [newAdminEmail, setNewAdminEmail]= useState('')
+  const [banUserEmail, setBanUserEmail]= useState('')
 
   const admins = donors.filter((e) => e.isAdmin)
 
@@ -29,12 +31,46 @@ const Admin = () => {
     fetchMessage()
   }, [api, setNotification])
 
+const addNewAdmin=async (e) => {
+  e.preventDefault()
+  try {
+    const response= await axios.post(`${api}/user/newaccess`, {newAdminEmail}, {withCredentials:true})
+    setNotification(response.data.message)
+  } catch (error) {
+    setNotification(error?.response?.data.message || "Failed to add new Admin")
+    console.log(error)
+  }
+  
+}
+
+const removeAdmin=async(id)=>{
+  try {
+    const response= await axios.post(`${api}/user/removeaccess`, {id}, {withCredentials: true})
+    setNotification(response.data.message)
+  } catch (error) {
+    setNotification(error?.response?.data?.message || "failed to remove admin")
+    
+  }
+}
+
+const banUser=async (e) => {
+  e.preventDefault()
+  try {
+    const response= await axios.post(`${api}/user/banuser`, {banUserEmail}, {withCredentials: true})
+    setNotification(response.data.message)
+  } catch (error) {
+    setNotification(error?.response?.data?.message || "failed to ban/unban user")
+    
+  }
+  
+}
+
   return (
     <div className='w-full min-h-screen flex flex-col items-center justify-start gap-6 py-6 p-1'>
       <div className='w-full flex flex-row items-center justify-center gap-4'>
-        <button className={`w-full  ${state==='message'? 'bg-white': 'bg-white/30'} text-black py-3`} onClick={() => setState('message')}>Message</button>
-        <button className={`w-full  ${state==='user'? 'bg-white': 'bg-white/30'} text-black py-3`} onClick={() => setState('user')}>User</button>
-        <button className={`w-full  ${state==='access'? 'bg-white': 'bg-white/30'} text-black py-3`} onClick={() => setState('access')}>Access</button>
+        <button className={`w-full  ${state === 'message' ? 'bg-white' : 'bg-white/30'} text-black py-3`} onClick={() => setState('message')}>Message</button>
+        <button className={`w-full  ${state === 'user' ? 'bg-white' : 'bg-white/30'} text-black py-3`} onClick={() => setState('user')}>User</button>
+        <button className={`w-full  ${state === 'access' ? 'bg-white' : 'bg-white/30'} text-black py-3`} onClick={() => setState('access')}>Access</button>
       </div>
       {
         state === 'message' && <div className='w-full flex flex-col items-center justify-center gap-4'>
@@ -65,7 +101,17 @@ const Admin = () => {
         </div>
       }
       {
-        state === 'user' && <div>
+        state === 'user' && <div className='w-full py-6 flex flex-col items-center justify-center gap-6'>
+          <h1 className='text-2xl font-semibold text-center'>User Management</h1>
+          <div className='w-full flex flex-col items-center justify-center gap-4 bg-white text-black py-4'>
+            <h1 className='text-xl font-semibold text-center'>Ban/Unban user</h1>
+            <form onSubmit={banUser} className='flex flex-col gap-2'>
+              <label htmlFor="email">Email</label>
+              <input type="email" name='email' id='email' className='px-3 p-1 rounded-md outline-none border-2' value={banUserEmail} onChange={(e)=> setBanUserEmail(e.target.value)}/>
+              <button type='submit' className='px-3 p-1 rounded-lg bg-black text-white'>Submit</button>
+            </form>
+          </div>
+
 
         </div>
       }
@@ -80,14 +126,21 @@ const Admin = () => {
                     <h1>{e.name}</h1>
                     <p>{e.phone}</p>
                     <p>{e.email}</p>
+                    <button onClick={()=> removeAdmin(e._id)} className='text-2xl '><MdDeleteOutline /></button>
                   </div>
                 })}
               </div> : <span>No admin available</span>
             }
           </div>
-          <div>
+          <form onSubmit={addNewAdmin} className='w-full flex flex-col items-center justify-center gap-4 bg-white text-black py-4'>
             <h1>Add New Admin</h1>
-          </div>
+            <div className='w-auto flex flex-col gap-2'>
+              <label htmlFor="email">Email</label>
+              <input type="email" name='email' id='email' value={newAdminEmail} onChange={(e)=>setNewAdminEmail(e.target.value)} className='outline-none px-2 p-1 rounded-lg border-2'/>
+
+            </div>
+            <button type='submit' className='px-4 p-1 bg-black text-white rounded-lg'>Submit</button>
+          </form>
         </div>
       }
 
