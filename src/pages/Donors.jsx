@@ -47,8 +47,8 @@ const Donors = () => {
 
 
               <div className='w-full flex items-center justify-between'>
-                <Link to={`/donor/${_id}`} className='font-bold '>{name}</Link>
-                <p className='text-xl font-bold  rounded-lg p-2 text-green-600'>{bloodgroup}</p>
+                <Link to={`/donor/${_id}`} className='font-bold text-lg'>{name}</Link>
+                <p className='text-xl font-bold  rounded-lg p-2'>{bloodgroup}</p>
               </div>
 
               <p className='italic'>District: {district}</p>
@@ -57,7 +57,7 @@ const Donors = () => {
                 {
                   isAvailable ? <div className='w-full flex items-center justify-between'>
                     <Link to={`/donor/${_id}`}>View</Link>
-                    <button onClick={() => handleRequest(_id)}>Request</button>
+                    <button onClick={() => handleRequest(_id)} className='p-1 px-3 bg-white/30 rounded-lg shadow-sm'>Request</button>
                   </div> : <p className='italic'>not available</p>
                 }
               </div>
