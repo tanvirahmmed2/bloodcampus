@@ -2,6 +2,7 @@ import React from 'react'
 import {Link} from "react-router-dom"
 import { useContext } from 'react';
 import { ThemeContext } from '../Component/ThemeProvider';
+import { CgProfile } from "react-icons/cg";
 
 const Navbar = () => {
   const { isLogin}= useContext(ThemeContext)
@@ -15,9 +16,9 @@ const Navbar = () => {
         <div className='w-auto h-14 flex flex-row items-center justify-center '>
           <Link className='h-14 px-2 lg:px-8 flex items-center justify-center font-semibold hover:border-b-2' to="/donors">Donors</Link>
           <Link className='h-14 px-2 lg:px-8 flex items-center justify-center font-semibold hover:border-b-2' to="/about">About</Link>
-          <Link className='h-14 px-2 lg:px-8 flex items-center justify-center font-semibold hover:border-b-2' to="/contact">Contact</Link>
-          {isLogin? <Link className='h-10 px-2 lg:px-8 flex items-center justify-center  bg-green-600 rounded-lg font-bold' to="/profile">Profile</Link>
-          : <Link className='h-10 px-2 lg:px-8 flex items-center justify-center  bg-green-600 rounded-lg font-bold' to="/login">Login</Link>
+          <Link className='h-14 px-2 lg:px-8 hidden md:flex items-center justify-center font-semibold hover:border-b-2' to="/contact">Contact</Link>
+          {isLogin? <Link className='h-10 px-2 lg:px-8 flex items-center justify-center text-2xl font-bold' to="/profile"><CgProfile/></Link>
+          : <Link className='h-10 px-2 lg:px-8 flex items-center justify-center  rounded-lg font-bold' to="/login">Login</Link>
           }
         </div>
       </nav>

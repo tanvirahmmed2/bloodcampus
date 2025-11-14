@@ -32,18 +32,20 @@ const Profile = () => {
   };
 
 
-  const { _id, name, email, lastdonated, dateofbirth, isAvailable, bloodgroup, district,  requests, upazilla } = user
+  const { _id, name, email, phone, lastdonated, dateofbirth, isAvailable, bloodgroup, district, requests, upazilla } = user
 
   const [formData, setFormData] = useState({
     name: name,
-    lastdonated: lastdonated,
-    isAvilable: isAvailable,
+    lastdonated: lastdonated || '',
+    email: email,
+    phone: phone,
+    id: _id,
     district: district,
     upazilla: upazilla
   })
 
   const [changePassData, setChangePassData] = useState({
-    id:_id,
+    id: _id,
     oldpass: '',
     newpass: ''
   })
@@ -56,7 +58,7 @@ const Profile = () => {
   const updateProfile = async (e) => {
     e.preventDefault()
     try {
-      const response = await axios.put(`${api}/user/update`, formData, { withCredentials: true })
+      const response = await axios.post(`${api}/user/updateprofile`, formData, { withCredentials: true })
       setNotification(response.data.message)
     } catch (error) {
       setNotification(error?.response?.data?.message || "failed to update profile")
@@ -71,7 +73,7 @@ const Profile = () => {
       setNotification(response.data.message)
     } catch (error) {
       setNotification(error?.response?.data?.message || "Failed to change availability")
-      
+
 
     }
 
@@ -95,18 +97,21 @@ const Profile = () => {
 
   }
 
-  const deleteRequest=async (id) => {
-    const data={userId:_id, requestId: id}
+  const deleteRequest = async (id) => {
+    const data = { userId: _id, requestId: id }
     try {
-      const response= await axios.post(`${api}/user/deleterequest`, data, {withCredentials: true})
+      const response = await axios.post(`${api}/user/deleterequest`, data, { withCredentials: true })
       setNotification(response.data.message)
     } catch (error) {
       console.log(error)
       setNotification(error?.response?.data?.message || 'Failed to delete request')
-      
+
     }
-    
+
   }
+
+
+
 
   useEffect(() => {
     if (!isLogin) navigate('/login');
@@ -141,6 +146,15 @@ const Profile = () => {
               <label htmlFor="name" className='text-black'>Name</label>
               <input type="text" id='name' name='name' value={formData.name} onChange={handleChange} className='outline-none border-2 px-2 p-1 rounded-md' />
             </div>
+            <div className='flex flex-col '>
+              <label htmlFor="email" className='text-black'>Email</label>
+              <input type="email" id='email' name='email' value={formData.email} onChange={handleChange} className='outline-none border-2 px-2 p-1 rounded-md' />
+            </div>
+            <div className='flex flex-col '>
+              <label htmlFor="phone" className='text-black'>Phone</label>
+              <input type="text" id='phone' name='phone' value={formData.phone} onChange={handleChange} className='outline-none border-2 px-2 p-1 rounded-md' />
+            </div>
+          
             <div className='flex flex-col '>
               <label htmlFor="lastdoneted" className='text-black'>Last Doneted</label>
               <input type="date" id='nlastdoneted' name='lastdoneted' value={formData.lastdonated} onChange={handleChange} className='outline-none border-2 px-2 p-1 rounded-md' />
@@ -198,7 +212,7 @@ const Profile = () => {
                 <p>{message}</p>
                 <p>Contact: {number}</p>
                 <p>{district}</p>
-                <button onClick={()=> deleteRequest(_id)}><MdDeleteOutline /></button>
+                <button onClick={() => deleteRequest(_id)}><MdDeleteOutline /></button>
               </div>
             })
           }
