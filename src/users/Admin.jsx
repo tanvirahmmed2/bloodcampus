@@ -13,6 +13,7 @@ const Admin = () => {
   const [messages, setMessages] = useState([])
   const [newAdminEmail, setNewAdminEmail]= useState('')
   const [banUserEmail, setBanUserEmail]= useState('')
+  const [deleteUserEmail, setDeleteUserEmail]= useState('')
 
   const admins = donors.filter((e) => e.isAdmin)
 
@@ -65,6 +66,18 @@ const banUser=async (e) => {
   
 }
 
+const deleteUser=async (e) => {
+  e.preventDefault()
+  try {
+    const response= await axios.post(`${api}/user/deleteuser`, {deleteUserEmail}, {withCredentials: true})
+    setNotification(response.data.message)
+  } catch (error) {
+    setNotification(error?.response?.data?.message || "failed to delete user")
+    
+  }
+  
+}
+
   return (
     <div className='w-full min-h-screen flex flex-col items-center justify-start gap-6 py-6 p-1'>
       <div className='w-full flex flex-row items-center justify-center gap-4'>
@@ -108,6 +121,14 @@ const banUser=async (e) => {
             <form onSubmit={banUser} className='flex flex-col gap-2'>
               <label htmlFor="email">Email</label>
               <input type="email" name='email' id='email' className='px-3 p-1 rounded-md outline-none border-2' value={banUserEmail} onChange={(e)=> setBanUserEmail(e.target.value)}/>
+              <button type='submit' className='px-3 p-1 rounded-lg bg-black text-white'>Submit</button>
+            </form>
+          </div>
+          <div className='w-full flex flex-col items-center justify-center gap-4 bg-white text-black py-4'>
+            <h1 className='text-xl font-semibold text-center'>Delete user account</h1>
+            <form onSubmit={deleteUser} className='flex flex-col gap-2'>
+              <label htmlFor="email">Email</label>
+              <input type="email" name='email' id='email' className='px-3 p-1 rounded-md outline-none border-2' value={deleteUserEmail} onChange={(e)=> setDeleteUserEmail(e.target.value)}/>
               <button type='submit' className='px-3 p-1 rounded-lg bg-black text-white'>Submit</button>
             </form>
           </div>
