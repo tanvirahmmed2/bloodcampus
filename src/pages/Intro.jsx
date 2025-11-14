@@ -5,9 +5,8 @@ import { ThemeContext } from "../Component/ThemeProvider"
 
 const Intro = () => {
   const { donors } = useContext(ThemeContext)
-  const availableCount = donors.length;
   
-  
+  const availableDonor= donors.filter((e)=> e.isAvailable).length || 0
 
   return (
     <section className='w-full my-12 h-auto p-2 flex flex-col items-center justify-center'>
@@ -33,12 +32,12 @@ const Intro = () => {
           <div className='w-full flex flex-row items-center justify-center gap-4 p-4'>
             <div className='w-full p-2 flex bg-red-400 rounded-lg flex-col items-center justify-center gap-2'>
               <h1>Available Donors</h1>
-              <p className='text-3xl font-bold'>{availableCount}</p>
+              <p className='text-3xl font-bold'>{availableDonor}</p>
               
             </div>
             <div className='w-full p-2 flex bg-red-400 rounded-lg flex-col items-center justify-center gap-2'>
-              <h1>Total donated</h1>
-              <p className='text-3xl font-bold'>12</p>
+              <h1>Total Donor</h1>
+              <p className='text-3xl font-bold'>{donors !== null ? <span>{donors.length}</span>: <span>0</span>}</p>
               
             </div>
             <div className='w-full p-2 flex bg-red-400 rounded-lg flex-col items-center justify-center gap-2'>

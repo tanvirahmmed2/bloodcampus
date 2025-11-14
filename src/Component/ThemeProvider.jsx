@@ -555,7 +555,7 @@ export const ThemeProvider = ({ children }) => {
         if (response.data.success) {
           setIsLogin(true)
           setUser(response.data.payload)
-          if (response.data.payload.role === 'admin') {
+          if (response.data.payload.isAdmin) {
             setIsAdmin(true)
           } else {
             setIsAdmin(false)

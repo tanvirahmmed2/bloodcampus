@@ -1,13 +1,21 @@
 
 import { useContext } from 'react'
 import { ThemeContext } from './ThemeProvider'
+import { useEffect } from 'react'
+import { useNavigate } from 'react-router-dom'
 
 const ProtectedAdmin = ({ children }) => {
-    const { isAdmin } = useContext(ThemeContext)
+  const { isAdmin } = useContext(ThemeContext)
+  const navigate = useNavigate()
+
+  useEffect(() => {
     if (!isAdmin) {
-        window.location.replace('/')
+      navigate('/', { replace: true })
     }
-    return children
+  }, [isAdmin, navigate])
+
+  return isAdmin ? children : null
 }
+
 
 export default ProtectedAdmin

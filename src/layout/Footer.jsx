@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react'
+import { Link } from 'react-router-dom'
 
 const Footer = () => {
   const [year, setYear] = useState(new Date().getFullYear())
@@ -38,11 +39,13 @@ const Footer = () => {
             >
               DisiBin
             </a>
+
           </p>
+          <Link to='/admin' className='text-xs italic'>Admin</Link>
         </div>
       </div>
 
-      
+
     </footer>
   )
 }
