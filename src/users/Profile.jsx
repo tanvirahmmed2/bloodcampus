@@ -96,8 +96,9 @@ const Profile = () => {
   }
 
   const deleteRequest=async (id) => {
+    const data={userId:_id, requestId: id}
     try {
-      const response= await axios.delete(`${api}/user/deleterequest`, {id}, {withCredentials: true})
+      const response= await axios.post(`${api}/user/deleterequest`, data, {withCredentials: true})
       setNotification(response.data.message)
     } catch (error) {
       console.log(error)
