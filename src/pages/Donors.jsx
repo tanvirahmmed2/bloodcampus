@@ -8,16 +8,13 @@ import UsePageTitle from '../Component/UsePageTitle'
 
 const Donors = () => {
   UsePageTitle("Donors")
-  const { donors, loading, user, api } = useContext(ThemeContext);
+  const { donors, loading, user, api,  } = useContext(ThemeContext);
 
 
   const handleRequest = async (id) => {
     const payload = {
       donorId: id,
-      name: user.name,
-      district: user.district,
-      number: user.number,
-      bloodGroup: user.bloodgroup,
+      userId: user._id
     }
     try {
       const response = await axios.post(`${api}/user/request`, payload, { withCredentials: true })
