@@ -32,7 +32,7 @@ const Profile = () => {
   };
 
 
-  const { _id, name, email, lastdonated, dateofbirth, isAvailable, bloodgroup, district, nid, messages, upazilla } = user
+  const { _id, name, email, lastdonated, dateofbirth, isAvailable, bloodgroup, district, nid, requests, upazilla } = user
 
   const [formData, setFormData] = useState({
     name: name,
@@ -176,9 +176,9 @@ const Profile = () => {
       }
 
       {
-        messages !== null && <div>
+        requests !== null && <div>
           {
-            messages.map((e) => {
+            requests.map((e) => {
               const { name, number, district, message, _id } = e
               return <div key={_id}>
                 <h1>{name}</h1>

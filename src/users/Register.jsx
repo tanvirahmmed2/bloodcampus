@@ -7,7 +7,7 @@ import { ThemeContext } from "../Component/ThemeProvider";
 
 const Register = () => {
   UsePageTitle("Register Donor");
-  const { bloodgroups, districts, api, upazilas } = useContext(ThemeContext);
+  const { bloodgroups, districts, api, upazillas } = useContext(ThemeContext);
   const navigate = useNavigate()
 
   const [formData, setFormData] = useState({
@@ -154,7 +154,7 @@ const Register = () => {
               className="w-full px-3 py-2 rounded-lg border border-gray-300 outline-none focus:ring-2 focus:ring-red-400"
             >
               <option value="">Select Upazilla</option>
-              {upazilas.map((d) => (
+              {upazillas.map((d) => (
                 <option key={d} value={d}>{d}</option>
               ))}
             </select>
