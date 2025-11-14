@@ -97,9 +97,11 @@ const Profile = () => {
 
   const deleteRequest=async (id) => {
     try {
-      
+      const response= await axios.delete(`${api}/user/deleterequest`, {id}, {withCredentials: true})
+      setNotification(response.data.message)
     } catch (error) {
       console.log(error)
+      setNotification(error?.response?.data?.message || 'Failed to delete request')
       
     }
     
@@ -186,6 +188,7 @@ const Profile = () => {
 
       {
         requests !== null && <div className='w-full flex flex-col gap-4 bg-white items-center justify-center text-black py-6'>
+          <h1 className='text-2xl font-semibold text-center'>Please Stand With Humanity</h1>
           {
             requests.map((e) => {
               const { name, number, district, message, _id } = e
