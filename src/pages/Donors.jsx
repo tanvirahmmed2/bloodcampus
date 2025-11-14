@@ -8,7 +8,7 @@ import UsePageTitle from '../Component/UsePageTitle'
 
 const Donors = () => {
   UsePageTitle("Donors")
-  const { donors, loading, user, api,  } = useContext(ThemeContext);
+  const { donors, loading, user, api,setNotification  } = useContext(ThemeContext);
 
 
   const handleRequest = async (id) => {
@@ -18,9 +18,10 @@ const Donors = () => {
     }
     try {
       const response = await axios.post(`${api}/user/request`, payload, { withCredentials: true })
-      alert(response.data.message)
+      setNotification(response.data.message)
     } catch (error) {
-      alert(error?.response?.data?.message || 'Failed to send request')
+      setNotification(error?.response?.data?.message || 'Failed to send request')
+      console.log(error)
     }
 
   }

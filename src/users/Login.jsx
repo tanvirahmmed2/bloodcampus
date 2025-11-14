@@ -6,7 +6,7 @@ import { useContext } from "react";
 import { ThemeContext } from "../Component/ThemeProvider";
 
 const Login = () => {
-  const { api} = useContext(ThemeContext)
+  const { api, setNotification} = useContext(ThemeContext)
   const [formData, setFormData] = useState({
     email: "",
     password: "",
@@ -21,11 +21,11 @@ const Login = () => {
     e.preventDefault();
     try {
       const response = await axios.post(`${api}/user/login`, formData, { withCredentials: true })
-      alert(response.data.message)
+      setNotification(response.data.message)
       window.location.replace('/profile')
       
     } catch (error) {
-      alert(error?.response?.data?.message || 'failed to log in')
+      setNotification(error?.response?.data?.message || 'failed to log in')
 
     }
   };

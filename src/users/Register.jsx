@@ -7,7 +7,7 @@ import { ThemeContext } from "../Component/ThemeProvider";
 
 const Register = () => {
   UsePageTitle("Register Donor");
-  const { bloodgroups, districts, api, upazillas } = useContext(ThemeContext);
+  const { bloodgroups, districts, api, upazillas, setNotification } = useContext(ThemeContext);
   const navigate = useNavigate()
 
   const [formData, setFormData] = useState({
@@ -35,13 +35,13 @@ const Register = () => {
     e.preventDefault();
     try {
       const response = await axios.post(`${api}/user/register`, formData, { withCredentials: true })
-      alert(response.data.message)
+      setNotification(response.data.message)
       if (response.data.success) {
         navigate('/login')
       }
     } catch (error) {
       console.log(error)
-      alert(error?.response?.data?.message || 'failed to register')
+      setNotification(error?.response?.data?.message || 'failed to register')
 
     }
 

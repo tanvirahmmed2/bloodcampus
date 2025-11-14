@@ -15,13 +15,14 @@ import ProtectedAdmin from "./Component/ProtectedAdmin";
 import ProtectedRoute from "./Component/ProtectedRoute";
 import ProtectedProfile from "./Component/ProtectedProfile";
 import DonorProfile from "./users/DonorProfile";
+import Notification from "./Component/Notification";
 
 
 function App() {
   return (
     <div className="min-h-screen bg-gradient-to-br from-red-500 to-red-300 w-full overflow-x-hidden text-white">
       <Navbar />
-
+      <Notification/>
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/donors" element={<Donors />} />

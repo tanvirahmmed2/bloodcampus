@@ -508,6 +508,7 @@ export const ThemeProvider = ({ children }) => {
   const api = 'http://localhost:5000/api'
   const base_url = 'http://localhost:5000'
   const [donors, setDonors] = useState([]);
+    const [notification, setNotification] = useState(null)
   const [loading, setLoading] = useState(true);
   const [user, setUser] = useState([])
   const [isLogin, setIsLogin] = useState(false)
@@ -523,7 +524,7 @@ export const ThemeProvider = ({ children }) => {
         }
       } catch (error) {
         setLoading(false)
-        alert('Failed to load server')
+        setNotification('Failed to load server')
 
       }
     }
@@ -575,7 +576,7 @@ export const ThemeProvider = ({ children }) => {
 
   const contextValue = {
     districts,upazillas, bloodgroups, donors, setDonors, loading, api,
-    user, setUser, isAdmin, setIsAdmin, isLogin, setIsLogin,
+    user, setUser, isAdmin, setIsAdmin, isLogin, setIsLogin,notification, setNotification
 
   }
 

@@ -12,7 +12,7 @@ const Profile = () => {
   const [changepass, setChnagePass] = useState(false)
 
 
-  const { api, setIsLogin, user, isLogin, districts, upazillas } = useContext(ThemeContext)
+  const { api, setIsLogin, user, isLogin, districts, upazillas, setNotification } = useContext(ThemeContext)
   const navigate = useNavigate()
 
   const handleLogout = async () => {
@@ -24,15 +24,15 @@ const Profile = () => {
         setIsLogin(true)
       }
       window.location.replace('/login')
-      alert(response.data.message)
+      setNotification(response.data.message)
     } catch (error) {
-      alert(error?.response?.data?.message || 'Failed to logout')
+      setNotification(error?.response?.data?.message || 'Failed to logout')
       console.log(error)
     }
   };
 
 
-  const { _id, name, email, lastdonated, dateofbirth, isAvailable, bloodgroup, district, nid, requests, upazilla } = user
+  const { _id, name, email, lastdonated, dateofbirth, isAvailable, bloodgroup, district,  requests, upazilla } = user
 
   const [formData, setFormData] = useState({
     name: name,
@@ -57,9 +57,9 @@ const Profile = () => {
     e.preventDefault()
     try {
       const response = await axios.put(`${api}/user/update`, formData, { withCredentials: true })
-      alert(response.data.message)
+      setNotification(response.data.message)
     } catch (error) {
-      alert(error?.response?.data?.message || "failed to update profile")
+      setNotification(error?.response?.data?.message || "failed to update profile")
     }
 
   }
@@ -68,9 +68,9 @@ const Profile = () => {
   const changeAvailablity = async (id) => {
     try {
       const response = await axios.post(`${api}/user/changeavailability`, { id }, { withCredentials: true })
-      alert(response.data.message)
+      setNotification(response.data.message)
     } catch (error) {
-      alert(error?.response?.data?.message || "Failed to change availability")
+      setNotification(error?.response?.data?.message || "Failed to change availability")
       
 
     }
@@ -86,13 +86,23 @@ const Profile = () => {
     e.preventDefault()
     try {
       const response = await axios.post(`${api}/user/changepassword`, changePassData, { withCredentials: true })
-      alert(response.data.message)
+      setNotification(response.data.message)
       setChnagePass(false)
     } catch (error) {
-      alert(error?.response?.data?.message || "failed to change passwordd")
+      setNotification(error?.response?.data?.message || "failed to change passwordd")
       console.log(error)
     }
 
+  }
+
+  const deleteRequest=async (id) => {
+    try {
+      
+    } catch (error) {
+      console.log(error)
+      
+    }
+    
   }
 
   useEffect(() => {
@@ -113,7 +123,6 @@ const Profile = () => {
             <p>Blood Group: {bloodgroup}</p>
             <p>Date of Birth: {dateofbirth.slice(0, 10)}</p>
             <p>District: {district}</p>
-            <p>Nid Number: {nid}</p>
             <p>{lastdonated !== null ? <span></span> : <span>Last donted: {lastdonated}</span>}</p>
           </div>
           <div className='flex flex-col gap-2'>
@@ -176,16 +185,16 @@ const Profile = () => {
       }
 
       {
-        requests !== null && <div>
+        requests !== null && <div className='w-full flex flex-col gap-4 bg-white items-center justify-center text-black py-6'>
           {
             requests.map((e) => {
               const { name, number, district, message, _id } = e
-              return <div key={_id}>
+              return <div key={_id} className='w-full flex flex-col md:flex-row items-center justify-between p-2'>
                 <h1>{name}</h1>
                 <p>{message}</p>
-                <p>{number}</p>
+                <p>Contact: {number}</p>
                 <p>{district}</p>
-                <button><MdDeleteOutline /></button>
+                <button onClick={()=> deleteRequest(_id)}><MdDeleteOutline /></button>
               </div>
             })
           }

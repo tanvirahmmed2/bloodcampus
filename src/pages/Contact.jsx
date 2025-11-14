@@ -4,7 +4,7 @@ import { useState } from 'react';
 import { ThemeContext } from '../Component/ThemeProvider';
 
 const Contact = () => {
-  const { api } = useContext(ThemeContext)
+  const { api , setNotification} = useContext(ThemeContext)
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -23,7 +23,7 @@ const Contact = () => {
     try {
       const response = await axios.post(`${api}/message/new`, formData)
 
-      alert(response.data.message);
+      setNotification(response.data.message);
       setFormData({
         name: '',
         email: '',
@@ -31,7 +31,7 @@ const Contact = () => {
         message: ''
       })
     } catch (error) {
-      alert((error.response?.data?.message || "Server error"));
+      setNotification(error.response?.data?.message || "Server error");
     }
   }
   return (
