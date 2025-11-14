@@ -16,6 +16,7 @@ import ProtectedRoute from "./Component/ProtectedRoute";
 import ProtectedProfile from "./Component/ProtectedProfile";
 import DonorProfile from "./users/DonorProfile";
 import Notification from "./Component/Notification";
+import Recover from "./users/Recover";
 
 
 function App() {
@@ -28,6 +29,7 @@ function App() {
         <Route path="/donors" element={<Donors />} />
         <Route path="/donor/:id" element={<ProtectedProfile><DonorProfile /></ProtectedProfile>} />
         <Route path="/about" element={<About/>} />
+        <Route path="/recovery" element={<ProtectedRoute><Recover/></ProtectedRoute>} />
         <Route path="/login" element={<ProtectedRoute><Login/></ProtectedRoute>}/>
         <Route path="/register" element={<ProtectedRoute><Register/></ProtectedRoute>}/>
         <Route path="/contact" element={<Contact/>}/>

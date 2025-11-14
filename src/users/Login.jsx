@@ -52,7 +52,7 @@ const Login = () => {
           </Link>
         </div>
 
-        {/* Login Form */}
+        
         <form
           onSubmit={handleSubmit}
           className="w-full md:w-1/2 flex flex-col gap-4 text-black"
@@ -83,6 +83,7 @@ const Login = () => {
               required
               className="w-full px-3 py-2 rounded-lg border border-gray-300 outline-none focus:ring-2 focus:ring-red-400"
             />
+            <Link to='/recovery'>Forget password?</Link>
           </div>
 
           <button
