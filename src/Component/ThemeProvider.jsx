@@ -505,8 +505,8 @@ const bloodgroups = [
 export const ThemeContext = createContext();
 
 export const ThemeProvider = ({ children }) => {
-  const api = 'http://localhost:5000/api'
-  const base_url = 'http://localhost:5000'
+  const api = 'https://bloodcampus-server.onrender.com/api'
+  const base_url = 'https://bloodcampus-server.onrender.com'
   const [donors, setDonors] = useState([]);
     const [notification, setNotification] = useState(null)
   const [loading, setLoading] = useState(true);
@@ -523,7 +523,7 @@ export const ThemeProvider = ({ children }) => {
 
         }
       } catch (error) {
-        setLoading(false)
+        setLoading(true)
         setNotification('Failed to load server')
 
       }

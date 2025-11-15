@@ -17,9 +17,15 @@ import ProtectedProfile from "./Component/ProtectedProfile";
 import DonorProfile from "./users/DonorProfile";
 import Notification from "./Component/Notification";
 import Recover from "./users/Recover";
+import { useContext } from "react";
+import { ThemeContext } from "./Component/ThemeProvider";
+import Loader from "./Component/Loader";
 
 
 function App() {
+  const {loading}= useContext(ThemeContext)
+
+  if(loading) return <Loader/>
   return (
     <div className="min-h-screen bg-gradient-to-br from-red-500 to-red-300 w-full overflow-x-hidden text-white">
       <Navbar />
