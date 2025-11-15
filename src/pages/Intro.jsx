@@ -16,7 +16,7 @@ const Intro = () => {
 
           <p className=' px-4 rounded-lg bg-white/20 w-60'>Community powered • 24/7</p>
           <p className='text-6xl font-semibold'>Find a donor faster — become a lifesaver</p>
-          <p>Search by blood type and location. If you’re able to donate, add your details to help someone nearby. This is a safe demo — try the flow without sharing real data.</p>
+          <p>Search by blood type and location. If you’re able to donate, add your details to help someone nearby. </p>
           <div className='w-full flex flex-row gap-4 items-center'>
             <Link to="/donors" className='p-2 bg-white text-red-500 px-4 rounded-lg '>Find donors</Link>
             <Link to="/register" className='p-2 bg-red-500 px-4 rounded-lg '>Be a donor</Link>
