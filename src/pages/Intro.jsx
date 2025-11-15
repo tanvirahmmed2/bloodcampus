@@ -30,17 +30,17 @@ const Intro = () => {
             <p>Filter by type and city</p>
           </div>
           <div className='w-full flex flex-row items-center justify-center gap-4 p-4'>
-            <div className='w-full p-2 flex bg-red-400 rounded-lg flex-col items-center justify-center gap-2'>
+            <div className='w-full h-28 p-2 flex bg-red-400 rounded-lg flex-col items-center justify-center gap-2'>
               <h1>Available Donors</h1>
               <p className='text-3xl font-bold'>{availableDonor}</p>
               
             </div>
-            <div className='w-full p-2 flex bg-red-400 rounded-lg flex-col items-center justify-center gap-2'>
+            <div className='w-full h-28 p-2 flex bg-red-400 rounded-lg flex-col items-center justify-center gap-2'>
               <h1>Total Donor</h1>
               <p className='text-3xl font-bold'>{donors !== null ? <span>{donors.length}</span>: <span>0</span>}</p>
               
             </div>
-            <div className='w-full p-2 flex bg-red-400 rounded-lg flex-col items-center justify-center gap-2'>
+            <div className='w-full h-28 p-2 flex bg-red-400 rounded-lg flex-col items-center justify-center gap-2'>
               <h1>Blood group</h1>
               <p className='text-3xl font-bold'>8</p>
               
