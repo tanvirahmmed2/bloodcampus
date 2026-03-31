@@ -1,0 +1,94 @@
+const mongoose = require('mongoose')
+
+
+
+const userSchema = new mongoose.Schema({
+    name: {
+        type: String,
+        required: true,
+        trim: true,
+    },
+    password: {
+        type: String,
+        required: true
+    },
+    email: {
+        type: String,
+        required: true,
+        unique: true
+    },
+    bloodgroup: {
+        type: String,
+        required: true,
+
+    },
+    district: {
+        type: String,
+        required: true
+    },
+    upazilla: {
+        type: String,
+        required: true
+    },
+    phone: {
+        type: String,
+        required: true,
+    },
+    dateofbirth: {
+        type: Date,
+        required: true,
+    },
+    lastdoneted: {
+        type: Date,
+        default: null
+
+    },
+    isAvailable: {
+        type: Boolean,
+        default: false,
+    },
+    isBanned: {
+        type: Boolean,
+        default: false,
+    },
+    isAdmin: {
+        type: Boolean,
+        default: false,
+    },
+    role: {
+        type: String,
+        trim: true,
+        enum: ['admin, member']
+    },
+    totalDonated: {
+        type: Number,
+        default: 0
+    },
+    requests: [
+        {
+            userId:  { type: String, trim: true, required: true },
+            name: { type: String, trim: true, required: true },
+            number: { type: String, trim: true, required: true },
+            upazilla: { type: String, trim: true, required: true },
+            message: { type: String, trim: true, required: true },
+        }
+    ],
+    resetToken: {
+        type: String,
+        trim: true
+    },
+    tokenExpireAt: {
+        type: Date,
+        trim: true,
+    },
+    createdOn: {
+        type: Date,
+        default: Date.now()
+    }
+
+})
+
+
+const User =mongoose.model.User || mongoose.model('User', userSchema)
+
+module.exports = User
