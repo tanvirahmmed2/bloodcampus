@@ -15,7 +15,8 @@ const userSchema = new mongoose.Schema({
     email: {
         type: String,
         required: true,
-        unique: true
+        unique: true,
+        trim:true
     },
     bloodgroup: {
         type: String,
@@ -33,12 +34,13 @@ const userSchema = new mongoose.Schema({
     phone: {
         type: String,
         required: true,
+        trim:true
     },
-    dateofbirth: {
+    dateOfBirth: {
         type: Date,
         required: true,
     },
-    lastdoneted: {
+    lastDoneted: {
         type: Date,
         default: null
 
@@ -51,14 +53,11 @@ const userSchema = new mongoose.Schema({
         type: Boolean,
         default: false,
     },
-    isAdmin: {
-        type: Boolean,
-        default: false,
-    },
     role: {
         type: String,
         trim: true,
-        enum: ['admin, member']
+        enum: ['admin, member'],
+        default:'member'
     },
     totalDonated: {
         type: Number,
@@ -81,7 +80,7 @@ const userSchema = new mongoose.Schema({
         type: Date,
         trim: true,
     },
-    createdOn: {
+    createdAt: {
         type: Date,
         default: Date.now()
     }
