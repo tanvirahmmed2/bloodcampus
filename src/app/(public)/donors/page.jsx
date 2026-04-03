@@ -19,7 +19,7 @@ const Donors = () => {
   useEffect(() => {
     const fetchDonors = async () => {
       try {
-        const response = await axios.get(`/api/user/filter`, {
+        const response = await axios.get(`/api/user`, {
           params: { searchBloodgroup, searchDistrict, searchUpazilla },
           withCredentials: true,
         });
@@ -30,7 +30,7 @@ const Donors = () => {
     };
 
     fetchDonors();
-  }, [searchBloodgroup, searchDistrict, searchUpazilla, setDonors,]);
+  }, [searchBloodgroup, searchDistrict, searchUpazilla,]);
 
 
   const handleRequest = async (id) => {
@@ -47,7 +47,7 @@ const Donors = () => {
     }
 
   }
-
+console.log(donors)
   return (
     <section className='w-full min-h-screen p-1 flex flex-col  gap-12 items-center justify-start'>
 
@@ -85,31 +85,11 @@ const Donors = () => {
       </div>
 
 
-       {donors.slice(-50).map((donor) => {
-          const { _id, name, bloodgroup, district, isAvailable, } = donor;
-          return (
-            <motion.div initial={{ opacity: 0, scale: 0.8 }} whileInView={{ opacity: 1, scale: 1 }} transition={{ duration: 0.6 }} key={_id} className='w-full mx-auto backdrop-blur-md shadow-sm bg-red-400 shadow-black/30 h-44 rounded-lg p-4 flex flex-col justify-between cursor-pointer'>
-
-
-              <div className='w-full flex items-center justify-between'>
-                <Link to={`/donor/${_id}`} className='font-bold text-lg'>{name}</Link>
-                <p className='text-xl font-bold  rounded-lg p-2'>{bloodgroup}</p>
-              </div>
-
-              <p className='italic'>District: {district}</p>
-              <div className='w-full flex flex-row items-center justify-between'>
-
-                {
-                  isAvailable ? <div className='w-full flex items-center justify-between'>
-                    <Link to={`/donor/${_id}`}>View</Link>
-                    <button onClick={() => handleRequest(_id)} className='p-1 px-3 bg-white/30 rounded-lg shadow-sm'>Request</button>
-                  </div> : <p className='italic'>not available</p>
-                }
-              </div>
-
-            </motion.div>
-          );
-        })}
+       {donors.slice(-50).map((donor) => (
+        <div key={donor._id}>
+          <h1>{donor.name}</h1>
+        </div>
+       ))}
 
 
     </section>

@@ -33,7 +33,7 @@ const Register = () => {
 
     e.preventDefault();
     try {
-      const response = await axios.post(`/api/user/register`, formData, { withCredentials: true })
+      const response = await axios.post(`/api/user`, formData, { withCredentials: true })
       alert(response.data.message)
       
     } catch (error) {
@@ -47,7 +47,7 @@ const Register = () => {
 
   return (
     <section className="w-full min-h-screen p-4 flex items-center justify-center">
-      <motion.div initial={{ opacity: 0, scale: 0.9 }} whileInView={{ opacity: 1, scale: 1 }} transition={{ duration: 0.6 }} className="w-full max-w-lg shadow-lg bg-white/5 rounded-2xl p-8 flex flex-col items-center">
+      <motion.div initial={{ opacity: 0, scale: 0.9 }} whileInView={{ opacity: 1, scale: 1 }} transition={{ duration: 0.6 }} className="w-full max-w-3xl shadow-lg border border-red-900/20 shadow-red-100 bg-white/5 rounded-2xl p-8 flex flex-col items-center">
         <h1 className="text-3xl font-bold  mb-2">Become a Donor</h1>
         <p className="mb-6 text-gray-700">Donate blood, save a life ❤️</p>
 
